@@ -78,15 +78,13 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 2.9571, 3.53667 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
-position = Vector2( 141.89, 95.2753 )
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
-frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/left = SubResource( 1 )
