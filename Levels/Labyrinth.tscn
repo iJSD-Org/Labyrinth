@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://Entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Player/Player.tscn" type="PackedScene" id=2]
 
 [node name="Arena" type="Node"]
 
@@ -10,7 +10,9 @@
 [node name="Walls" type="TileMap" parent="Node2D"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 64
 format = 1
+tile_data = PoolIntArray( -262144, 32, 0, -262143, 33, 0, -262142, 34, 0, -196608, 24, 0, -196607, 10, 0, -196606, 26, 0, -131072, 24, 0, -131071, 10, 0, -131070, 26, 0, -65536, 24, 0, -65535, 10, 0, -65534, 26, 0, 0, 24, 0, 1, 10, 0, 2, 26, 0, 131067, -1073741795, 0, 131068, -1610612713, 0, 131069, -1610612711, 0, 131070, -1610612712, 0, 131071, -1610612713, 0, 65536, -1610612706, 0, 65537, 31, 0, 65538, -1610612703, 0, 196603, 1610612762, 0, 196604, -1610612705, 0, 196605, -1610612705, 0, 196606, -1610612705, 0, 196607, -1610612705, 0, 131072, -1610612705, 0, 131073, -1610612705, 0, 131074, -1610612703, 0, 262139, 1610612765, 0, 262140, -1610612708, 0, 262141, -1610612708, 0, 262142, -1610612708, 0, 262143, -1610612708, 0, 196608, -1610612708, 0, 196609, -1610612708, 0, 196610, -1610612702, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 3, 3 )
