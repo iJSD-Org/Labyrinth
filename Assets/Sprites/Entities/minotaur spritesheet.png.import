@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ghost spritesheet.png-920ab96c8bf723073577eee8bea10521.stex"
+path="res://.import/minotaur spritesheet.png-8719d4e207b343ea897eb829cb31197f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Entitties/ghost spritesheet.png"
-dest_files=[ "res://.import/ghost spritesheet.png-920ab96c8bf723073577eee8bea10521.stex" ]
+source_file="res://Assets/Sprites/Entities/minotaur spritesheet.png"
+dest_files=[ "res://.import/minotaur spritesheet.png-8719d4e207b343ea897eb829cb31197f.stex" ]
 
 [params]
 

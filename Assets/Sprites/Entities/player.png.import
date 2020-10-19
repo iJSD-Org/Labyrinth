@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/minotaur spritesheet.png-c8299091ff279dec2002140108b7c8f0.stex"
+path="res://.import/player.png-af5a4f8810c83b2e17e53c0d42964abe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Entitties/minotaur spritesheet.png"
-dest_files=[ "res://.import/minotaur spritesheet.png-c8299091ff279dec2002140108b7c8f0.stex" ]
+source_file="res://Assets/Sprites/Entities/player.png"
+dest_files=[ "res://.import/player.png-af5a4f8810c83b2e17e53c0d42964abe.stex" ]
 
 [params]
 
