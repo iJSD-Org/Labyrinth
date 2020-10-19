@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Labyrinth.Objects.Enemies.Minotaur.States;
+using Labyrinth.Objects.Enemies.Ghost.States;
 using Labyrinth.Objects.Player;
 using Godot;
 
-namespace Labyrinth.Objects.Enemies.Minotaur
+namespace Labyrinth.Objects.Enemies.Ghost
 {
 	public class Entity : KinematicBody2D
 	{
@@ -21,20 +21,21 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		public override void _Ready()
 		{
 			StatesMap.Add("Chase", GetNode("States/Chase"));
-			StatesMap.Add("Staggered", GetNode("States/Staggered"));
-			StatesMap.Add("Charge", GetNode("States/Charge"));
+			StatesMap.Add("Wander", GetNode("States/Wander"));
+			StatesMap.Add("Weakened", GetNode("States/Weakened"));
 
-			CurrentState = (Chase)GetNode("States/Chase");
+			CurrentState = (Wander)GetNode("States/Wander");
 
+			_player = GetParent().GetNode<KinematicBody2D>("Player");
+			
 			foreach (Node state in StatesMap.Values)
 			{
 				state.Connect(nameof(State.Finished), this, nameof(ChangeState));
 			}
 
-			_nav2d = GetParent().GetNode<Navigation2D>("Node2D/Navigation2D");
-			_player = GetParent().GetNode<KinematicBody2D>("Player");
-			StateStack.Push((State)StatesMap["Chase"]);
-			ChangeState("Chase");
+			
+			StateStack.Push((State)StatesMap["Wander"]);
+			ChangeState("Wander");
 		}
 		public override void _PhysicsProcess(float delta)
 		{
@@ -42,6 +43,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		}
 		private void ChangeState(string stateName)
 		{
+            GD.Print(stateName);
 			CurrentState.Exit(this);
 
 			if (stateName == "Dead")
@@ -50,7 +52,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 				return;
 			}
 
-			else if (stateName == "Staggered")
+			else if (stateName == "Weakened")
 			{
 				StateStack.Push((State)StatesMap[stateName]);
 			}
@@ -66,12 +68,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			// Pass target to Chase State
 			if (stateName == "Chase")
 			{
-				((Chase)CurrentState).Init((Player.Entity)_player, _nav2d);
-			}
-
-			else if (stateName == "Charge")
-			{
-				((Charge)CurrentState).Init((Player.Entity)_player);
+				((Chase)CurrentState).Init((Player.Entity)_player);
 			}
 
 			// We don"t want to reinitialize the state if we"re going back to the previous state
@@ -80,13 +77,18 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 
 			EmitSignal(nameof(StateChanged), CurrentState.Name);
 		}
-		private void _on_VisibilityNotifier2D_screen_entered()
+
+		private void _on_Area2D_body_entered(KinematicBody2D body)
 		{
-            /*do something*/
+			if(body.IsInGroup("player"))
+				ChangeState("Chase");
+			GetNode<Timer>("States/Wander/WanderTimer").Stop();
 		}
-		private void _on_VisibilityNotifier2D_screen_exited()
+
+		private void _on_Area2D_body_exited(KinematicBody2D body)
 		{
-			/*do something*/
+			if(body.IsInGroup("player"))
+				ChangeState("Wander");
 		}
 	}
 }
