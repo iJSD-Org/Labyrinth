@@ -7,12 +7,14 @@ namespace Labyrinth.Objects.Player
     {
         [Export] public int speed = 80;
         private AnimationPlayer _animPlayer;
+        private Sprite _torch;
         private bool _isMoving = false;
         public Vector2 velocity = new Vector2();
         private Vector2 _playerToMouse = new Vector2();
         public override void _Ready()
         {
             _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            _torch = GetNode<Sprite>("Torch");
         }
         public override void _Process(float delta)
         {  
@@ -27,10 +29,30 @@ namespace Labyrinth.Objects.Player
         }
         private void AnimateWalk()
         {        
-            if (_playerToMouse.x > 0 && _playerToMouse.y > -5)  _animPlayer.Play("right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5)  _animPlayer.Play("left");
-            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) _animPlayer.Play("up_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) _animPlayer.Play("up_left");
+            if (_playerToMouse.x > 0 && _playerToMouse.y > -5) {
+                _animPlayer.Play("right");
+                _torch.Position = GetNode<Position2D>("TorchRight").Position;
+                _torch.FlipH = false;
+                _torch.RotationDegrees = 25;
+            }
+            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5) {
+                _animPlayer.Play("left");
+                _torch.Position = GetNode<Position2D>("TorchLeft").Position;
+                _torch.FlipH = false;
+                _torch.RotationDegrees = -25;
+            }
+            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) {
+                _animPlayer.Play("up_right");
+                _torch.Position = GetNode<Position2D>("TorchRight").Position;
+                _torch.FlipH = true;
+                _torch.RotationDegrees = 25;
+            } 
+            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) {
+                _animPlayer.Play("up_left");
+                _torch.Position = GetNode<Position2D>("TorchLeft").Position;
+                _torch.FlipH = true;
+                _torch.RotationDegrees = -25;
+            }
         }
         private void GetInput()
         {
@@ -52,10 +74,30 @@ namespace Labyrinth.Objects.Player
         }
         private void AnimateIdle()
         {
-            if (_playerToMouse.x > 0 && _playerToMouse.y > -5)  _animPlayer.Play("idle_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5)  _animPlayer.Play("idle_left");
-            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) _animPlayer.Play("idle_up_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) _animPlayer.Play("idle_up_left");
+            if (_playerToMouse.x > 0 && _playerToMouse.y > -5) {
+                _animPlayer.Play("idle_right");
+                _torch.Position = GetNode<Position2D>("TorchRight").Position;
+                _torch.FlipH = false;
+                _torch.RotationDegrees = 25;
+            }
+            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5) {
+                _animPlayer.Play("idle_left");
+                _torch.Position = GetNode<Position2D>("TorchLeft").Position;
+                _torch.FlipH = false;
+                _torch.RotationDegrees = -25;
+            }
+            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) {
+                _animPlayer.Play("idle_up_right");
+                _torch.Position = GetNode<Position2D>("TorchRight").Position;
+                _torch.FlipH = true;
+                _torch.RotationDegrees = 25;
+            } 
+            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) {
+                _animPlayer.Play("idle_up_left");
+                _torch.Position = GetNode<Position2D>("TorchLeft").Position;
+                _torch.FlipH = true;
+                _torch.RotationDegrees = -25;
+            }
         }
     }
 }
