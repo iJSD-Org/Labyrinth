@@ -4,7 +4,7 @@ using Labyrinth.Objects;
 
 namespace Labyrinth.Objects.Enemies.Minotaur.States
 {
-    public class Staggered : State
+    public class Stagger : State
     {
         public override void _Ready()
         {

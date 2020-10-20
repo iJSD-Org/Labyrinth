@@ -21,7 +21,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		public override void _Ready()
 		{
 			StatesMap.Add("Chase", GetNode("States/Chase"));
-			StatesMap.Add("Staggered", GetNode("States/Staggered"));
+			StatesMap.Add("Stagger", GetNode("States/Stagger"));
 			StatesMap.Add("Charge", GetNode("States/Charge"));
 
 			CurrentState = (Chase)GetNode("States/Chase");
@@ -50,7 +50,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 				return;
 			}
 
-			else if (stateName == "Staggered")
+			else if (stateName == "Stagger")
 			{
 				StateStack.Push((State)StatesMap[stateName]);
 			}

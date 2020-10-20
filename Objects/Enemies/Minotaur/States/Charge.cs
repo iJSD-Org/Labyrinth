@@ -38,7 +38,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
             Speed += Acceleration * delta;
 			if (Speed > MaxSpeed) Speed = MaxSpeed;
             host.MoveAndSlide(_dir.Normalized() * Speed);
-            if(host.IsOnWall()) EmitSignal(nameof(Finished), "Staggered"); 
+            if(host.IsOnWall()) EmitSignal(nameof(Finished), "Stagger"); 
         }
     }
 }

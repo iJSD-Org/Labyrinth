@@ -172,6 +172,3 @@ shape = SubResource( 9 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 3 )
-
-[node name="ScentTimer" type="Timer" parent="."]
-[connection signal="timeout" from="ScentTimer" to="." method="AddScent"]
