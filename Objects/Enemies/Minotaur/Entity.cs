@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Labyrinth.Objects.Enemies.Minotaur.States;
-using Labyrinth.Objects.Player;
 using Godot;
 
 namespace Labyrinth.Objects.Enemies.Minotaur
@@ -29,15 +27,17 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			{
 				state.Connect(nameof(State.Finished), this, nameof(ChangeState));
 			}
-			
+
 			_player = GetParent().GetNode<KinematicBody2D>("Player");
 			StateStack.Push((State)StatesMap["Chase"]);
 			ChangeState("Chase");
 		}
+
 		public override void _PhysicsProcess(float delta)
 		{
 			CurrentState.Update(this, delta);
 		}
+
 		private void ChangeState(string stateName)
 		{
 			CurrentState.Exit(this);
@@ -77,13 +77,15 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 
 			EmitSignal(nameof(StateChanged), CurrentState.Name);
 		}
+
 		private void _on_VisibilityNotifier2D_screen_entered()
 		{
-            /*do something*/
+			// TODO: do something
 		}
+
 		private void _on_VisibilityNotifier2D_screen_exited()
 		{
-			/*do something*/
+			// TODO: do something
 		}
 	}
 }

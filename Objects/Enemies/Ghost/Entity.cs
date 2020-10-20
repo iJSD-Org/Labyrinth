@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Labyrinth.Objects.Enemies.Ghost.States;
-using Labyrinth.Objects.Player;
 using Godot;
 
 namespace Labyrinth.Objects.Enemies.Ghost
@@ -16,7 +14,6 @@ namespace Labyrinth.Objects.Enemies.Ghost
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 		private KinematicBody2D _player;
-		private Navigation2D _nav2d;
 
 		public override void _Ready()
 		{
@@ -33,14 +30,15 @@ namespace Labyrinth.Objects.Enemies.Ghost
 				state.Connect(nameof(State.Finished), this, nameof(ChangeState));
 			}
 
-			
 			StateStack.Push((State)StatesMap["Wander"]);
 			ChangeState("Wander");
 		}
+
 		public override void _PhysicsProcess(float delta)
 		{
 			CurrentState.Update(this, delta);
 		}
+
 		private void ChangeState(string stateName)
 		{
             GD.Print(stateName);

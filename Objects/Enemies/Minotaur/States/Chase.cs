@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using Labyrinth.Objects;
-using System.Collections.Generic;
 using Labyrinth.Objects.Player;
 
 namespace Labyrinth.Objects.Enemies.Minotaur.States
@@ -10,34 +8,23 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
     {
         [Export] public int Speed = 50;
         private Player.Entity _player;
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
         private Vector2 _direction = Vector2.Zero;
         private RayCast2D _ray;
-        private Sprite _sprite;
-        public override void _Ready()
-        {
-          
-        }
+
         public void Init(Player.Entity target)
 		{
-            _player = target;
+			_player = target;
             GetNode<Timer>("ChaseTimer").Start();
             GetNode<Timer>("ChaseTimer").WaitTime = (float)(_random.NextDouble() * (2.5 - 1.5) + 1.5);
 		}
+
         public override void Enter(KinematicBody2D host)
         { 
            _ray = host.GetNode<RayCast2D>("RayCast2D");
-           _sprite = host.GetNode<Sprite>("Sprite"); 
            host.GetNode<AnimationPlayer>("AnimationPlayer").Play("chase");
         }
-        public override void Exit(KinematicBody2D host)
-        {
 
-        }
-        public override void HandleInput(KinematicBody2D host, InputEvent @event)
-        {
-
-        }
         public override void Update(KinematicBody2D host, float delta)
         {
             ChaseTarget(host);
