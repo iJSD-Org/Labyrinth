@@ -7,7 +7,6 @@ namespace Labyrinth.Objects.Player.States
     {
         private AnimationPlayer _animPlayer;
         private bool _isMoving;
-        private Vector2 _velocity;
         private Vector2 _playerToMouse;
 
         public override void Enter(KinematicBody2D host)
