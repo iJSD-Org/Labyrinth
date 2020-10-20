@@ -7,7 +7,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 {
     public class Chase : State
     {
-        private int SPEED = 50;
+        [Export] public int Speed = 50;
         private Navigation2D _nav2d;
         private KinematicBody2D _player;
         private Vector2[] _path = new Vector2[100];
@@ -22,14 +22,14 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 		{
             _player = target;
             _nav2d = node;
-            _ray = GetParent().GetParent().GetNode<RayCast2D>("RayCast2D");
-            _sprite = GetParent().GetParent().GetNode<Sprite>("Sprite");
             GetNode<Timer>("ChaseTimer").Start();
             GetNode<Timer>("ChaseTimer").WaitTime = (float)(_random.NextDouble() * (2.5 - 1.5) + 1.5);
 		}
         public override void Enter(KinematicBody2D host)
         { 
-            GetParent().GetParent().GetNode<AnimationPlayer>("AnimationPlayer").Play("chase");
+           _ray = host.GetNode<RayCast2D>("RayCast2D");
+           _sprite = host.GetNode<Sprite>("Sprite"); 
+           host.GetNode<AnimationPlayer>("AnimationPlayer").Play("chase");
         }
         public override void Exit(KinematicBody2D host)
         {
@@ -42,11 +42,12 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         public override void Update(KinematicBody2D host, float delta)
         {
             _ray.CastTo = _player.Position - host.Position;
-            _path = _nav2d.GetSimplePath(host.GlobalPosition, _player.GlobalPosition, false);
+            _path = _nav2d.GetSimplePath(host.GlobalPosition, _player.GlobalPosition, true);
             List<Vector2> path = new List<Vector2>(_path);
             _sprite.FlipH = (_player.GlobalPosition - host.GlobalPosition).x <= 0;
             path.RemoveAt(0);
-            host.GlobalPosition = host.GlobalPosition.LinearInterpolate(path[0], (SPEED * delta) / host.GlobalPosition.DistanceTo(path[0]));       
+            host.MoveAndSlide((path[0] - host.GlobalPosition).Normalized() * Speed);
+           // host.GlobalPosition = host.GlobalPosition.LinearInterpolate(path[0], (Speed * delta) / host.GlobalPosition.DistanceTo(path[0]));       
         }
 
         private void _on_ChaseTimer_timeout()

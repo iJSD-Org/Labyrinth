@@ -7,7 +7,7 @@
 [ext_resource path="res://Objects/Enemies/Minotaur/Entity.cs" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.7392, 9.13282 )
+extents = Vector2( 10.7392, 8.77297 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "charge"
@@ -55,7 +55,7 @@ vframes = 2
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.4669, 5.43308 )
+position = Vector2( -1.62091, 4.36931 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -63,7 +63,7 @@ anims/charge = SubResource( 2 )
 anims/chase = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0.757328, 6.69804 )
+position = Vector2( -0.455534, 5.64728 )
 scale = Vector2( 1.00398, 0.856499 )
 
 [node name="States" type="Node" parent="."]

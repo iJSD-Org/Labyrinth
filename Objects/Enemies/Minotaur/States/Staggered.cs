@@ -13,7 +13,6 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         public override void Enter(KinematicBody2D host)
         {
             GetNode<Timer>("StaggerTimer").Start();
-            /*play anim*/
         }
         public override void Exit(KinematicBody2D host)
         {

@@ -60,14 +60,5 @@ namespace Labyrinth.Objects.Player
             else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) _animPlayer.Play("idle_up_right");
             else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) _animPlayer.Play("idle_up_left");
         }
-        public void AddScent()
-		{
-			Scent scent = (Scent)ScentScene.Instance();
-			scent.Position = Position;
-			GetTree().Root.AddChild(scent);
-
-			scent.Init(this);
-			ScentTrail.Add(scent);
-		}
     }
 }
