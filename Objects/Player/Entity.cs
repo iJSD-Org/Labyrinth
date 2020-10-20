@@ -1,4 +1,5 @@
 using Godot;
+using Labyrinth.Objects.Player.States;
 using System;
 using System.Collections.Generic;
 
@@ -6,62 +7,58 @@ namespace Labyrinth.Objects.Player
 {
     public class Entity : KinematicBody2D
     {
+        [Signal]
+        public delegate void StateChanged();
 	    [Export] public int Speed = 80;
-
-        private AnimationPlayer _animPlayer;
-        private bool _isMoving;
-        private Vector2 _velocity;
-        private Vector2 _playerToMouse;
         public PackedScene ScentScene = ResourceLoader.Load<PackedScene>("res://Objects/Player/Scent.tscn");
 		public List<Scent> ScentTrail = new List<Scent>();
+		public State CurrentState;
+		public Stack<State> StateStack = new Stack<State>();
+		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 
         public override void _Ready()
         {
-            _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        }
-        public override void _Process(float delta)
-        {  
-            _playerToMouse = GetGlobalMousePosition() - GlobalPosition;
-            if (_isMoving) AnimateWalk();
-            else AnimateIdle();
-        }        
+            StatesMap.Add("Walk", GetNode("States/Walk"));
+			StatesMap.Add("Idle", GetNode("States/Idle"));
+
+			CurrentState = (Idle)GetNode("States/Idle");
+
+			foreach (Node state in StatesMap.Values)
+			{
+				state.Connect(nameof(State.Finished), this, nameof(ChangeState));
+			}
+
+			StateStack.Push((State)StatesMap["Idle"]);
+			ChangeState("Idle");
+        }     
         public override void _PhysicsProcess(float delta)
         {
-            _velocity = Vector2.Zero;
-            GetInput();                      
+            CurrentState.Update(this, delta);                    
         }
-        private void AnimateWalk()
-        {        
-            if (_playerToMouse.x > 0 && _playerToMouse.y > -5)  _animPlayer.Play("right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5)  _animPlayer.Play("left");
-            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) _animPlayer.Play("up_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) _animPlayer.Play("up_left");
-        }
-        private void GetInput()
-        {
-            if (Input.IsActionPressed("ui_right"))
-                _velocity.x += 1;
 
-            if (Input.IsActionPressed("ui_left"))
-                _velocity.x -= 1;
+        private void ChangeState(string stateName)
+		{
+			CurrentState.Exit(this);
+			if (stateName == "Dead")
+			{
+				QueueFree();
+				return;
+			}
 
-            if (Input.IsActionPressed("ui_down"))
-                _velocity.y += 1;
+			else
+			{
+				StateStack.Pop();
+				StateStack.Push((State)StatesMap[stateName]);
+			}
 
-            if (Input.IsActionPressed("ui_up"))
-                _velocity.y -= 1;
+			CurrentState = StateStack.Peek();
+			// We don"t want to reinitialize the state if we"re going back to the previous state
+			if (stateName != "Previous")
+				CurrentState.Enter(this);
 
-            _isMoving = Input.IsActionPressed("ui_left") || Input.IsActionPressed("ui_right") || Input.IsActionPressed("ui_up") || Input.IsActionPressed("ui_down");      
-            _velocity = _velocity.Normalized() * Speed;
-            _velocity = MoveAndSlide(_velocity);               
-        }
-        private void AnimateIdle()
-        {
-            if (_playerToMouse.x > 0 && _playerToMouse.y > -5)  _animPlayer.Play("idle_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5)  _animPlayer.Play("idle_left");
-            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) _animPlayer.Play("idle_up_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) _animPlayer.Play("idle_up_left");
-        }
+			EmitSignal(nameof(StateChanged), CurrentState.Name);
+		}
+		
         public void AddScent()
 		{
 			Scent scent = (Scent)ScentScene.Instance();
