@@ -8,7 +8,9 @@ namespace Labyrinth.Objects.Enemies.Ghost.States
     {
 		private Vector2 _dir = Vector2.Zero;
 		private KinematicBody2D _player;
-		private int SPEED = 150;
+		private float SPEED = 0;
+		private int MAX_SPEED = 100;
+		private int ACCELERATION = 40;
         public override void _Ready()
 		{
 			
@@ -34,8 +36,10 @@ namespace Labyrinth.Objects.Enemies.Ghost.States
 
 		public override void Update(KinematicBody2D host, float delta)
 		{
+			SPEED += ACCELERATION * delta;
+			if (SPEED > MAX_SPEED) SPEED = MAX_SPEED;
 			_dir = _player.GlobalPosition - host.GlobalPosition;
-			host.MoveAndSlide(_dir * SPEED * delta);
+			host.MoveAndSlide(_dir.Normalized() * SPEED);
 		}
     }
 }
