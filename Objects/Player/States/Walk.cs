@@ -11,10 +11,16 @@ namespace Labyrinth.Objects.Player.States
         private bool _isMoving;
         private Vector2 _velocity;
         private Vector2 _playerToMouse;
+        private Sprite _torch;
+        private Position2D _torchRight;
+        private Position2D _torchLeft;
 
         public override void Enter(KinematicBody2D host)
         { 
             _animPlayer = host.GetNode<AnimationPlayer>("AnimationPlayer");
+            _torch = host.GetNode<Sprite>("Torch");
+            _torchLeft = host.GetNode<Position2D>("TorchLeft");
+            _torchRight = host.GetNode<Position2D>("TorchRight");
         }
 
         public override void Update(KinematicBody2D host, float delta)
@@ -48,10 +54,30 @@ namespace Labyrinth.Objects.Player.States
 
         private void AnimateWalk()
         {        
-            if (_playerToMouse.x > 0 && _playerToMouse.y > -5)  _animPlayer.Play("right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5)  _animPlayer.Play("left");
-            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) _animPlayer.Play("up_right");
-            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) _animPlayer.Play("up_left");
+            if (_playerToMouse.x > 0 && _playerToMouse.y > -5) {
+                _animPlayer.Play("right");
+                _torch.Position = _torchRight.Position;
+                _torch.FlipH = false;
+                _torch.RotationDegrees = 25;
+            }
+            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5) {
+                _animPlayer.Play("left");
+                _torch.Position = _torchLeft.Position;;
+                _torch.FlipH = true;
+                _torch.RotationDegrees = -25;
+            }
+            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) {
+                _animPlayer.Play("up_right");
+                _torch.Position = _torchRight.Position;
+                _torch.FlipH = false;
+                _torch.RotationDegrees = 25;
+            } 
+            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) {
+                _animPlayer.Play("up_left");
+                _torch.Position = _torchLeft.Position;
+                _torch.FlipH = true;
+                _torch.RotationDegrees = -25;
+            }
         }
 
     }
