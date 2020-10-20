@@ -2,26 +2,25 @@ using Godot;
 using System;
 using Labyrinth.Objects;
 using System.Collections.Generic;
+using Labyrinth.Objects.Player;
 
 namespace Labyrinth.Objects.Enemies.Minotaur.States
 {
     public class Chase : State
     {
         [Export] public int Speed = 50;
-        private Navigation2D _nav2d;
-        private KinematicBody2D _player;
-        private Vector2[] _path = new Vector2[100];
+        private Player.Entity _player;
         private Random _random = new Random();
+        private Vector2 _direction = Vector2.Zero;
         private RayCast2D _ray;
         private Sprite _sprite;
         public override void _Ready()
         {
           
         }
-        public void Init(Player.Entity target, Navigation2D node)
+        public void Init(Player.Entity target)
 		{
             _player = target;
-            _nav2d = node;
             GetNode<Timer>("ChaseTimer").Start();
             GetNode<Timer>("ChaseTimer").WaitTime = (float)(_random.NextDouble() * (2.5 - 1.5) + 1.5);
 		}
@@ -41,14 +40,36 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         }
         public override void Update(KinematicBody2D host, float delta)
         {
-            _ray.CastTo = _player.Position - host.Position;
-            _path = _nav2d.GetSimplePath(host.GlobalPosition, _player.GlobalPosition, true);
-            List<Vector2> path = new List<Vector2>(_path);
-            _sprite.FlipH = (_player.GlobalPosition - host.GlobalPosition).x <= 0;
-            path.RemoveAt(0);
-            host.MoveAndSlide((path[0] - host.GlobalPosition).Normalized() * Speed);
-           // host.GlobalPosition = host.GlobalPosition.LinearInterpolate(path[0], (Speed * delta) / host.GlobalPosition.DistanceTo(path[0]));       
+            ChaseTarget(host);
+            host.MoveAndSlide(_direction * Speed);
         }
+
+        private void ChaseTarget(KinematicBody2D host)
+		{
+			if (_player != null) _ray.CastTo = _player.Position - host.Position; 
+			_ray.ForceRaycastUpdate();
+
+			// if we can see the target, chase it
+			if (!_ray.IsColliding() || ((Node)_ray.GetCollider()).IsInGroup("player"))
+			{
+				_direction = _ray.CastTo.Normalized();
+			}
+			// or chase the first scent we see
+			else
+			{
+				foreach (Scent scent in _player.ScentTrail)
+				{
+					_ray.CastTo = scent.Position - host.Position;
+					_ray.ForceRaycastUpdate();
+
+					if (!_ray.IsColliding() || ((Node)_ray.GetCollider()).IsInGroup("player"))
+					{
+						_direction = _ray.CastTo.Normalized();
+						break;
+					}
+				}
+			}
+		}
 
         private void _on_ChaseTimer_timeout()
         {

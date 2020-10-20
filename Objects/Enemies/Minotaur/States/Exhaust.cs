@@ -4,7 +4,7 @@ using Labyrinth.Objects;
 
 namespace Labyrinth.Objects.Enemies.Minotaur.States
 {
-    public class Stagger : State
+    public class Exhaust : State
     {
         public override void _Ready()
         {
@@ -12,7 +12,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         }
         public override void Enter(KinematicBody2D host)
         {
-            GetNode<Timer>("StaggerTimer").Start();
+            GetNode<Timer>("ExhaustTimer").Start();
         }
         public override void Exit(KinematicBody2D host)
         {
@@ -29,7 +29,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 
         private void _on_StaggerTimer_timeout()
         {
-            GetNode<Timer>("StaggerTimer").Stop();
+            GetNode<Timer>("ExhaustTimer").Stop();
             EmitSignal(nameof(Finished), "Chase");
         }
     }

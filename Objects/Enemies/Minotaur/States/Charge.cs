@@ -22,6 +22,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         }
         public override void Enter(KinematicBody2D host)
         {
+            GetNode<Timer>("ChargeTimer").Start();
             _dir = _player.GlobalPosition - host.GlobalPosition;
             host.GetNode<AnimationPlayer>("AnimationPlayer").Play("charge");
         }
@@ -38,7 +39,12 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
             Speed += Acceleration * delta;
 			if (Speed > MaxSpeed) Speed = MaxSpeed;
             host.MoveAndSlide(_dir.Normalized() * Speed);
-            if(host.IsOnWall()) EmitSignal(nameof(Finished), "Stagger"); 
+        }
+
+        private void _on_ChargeTimer_timeout()
+        {
+             GetNode<Timer>("ChargeTimer").Stop();
+            EmitSignal(nameof(Finished), "Exhaust"); 
         }
     }
 }

@@ -16,12 +16,11 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 		private KinematicBody2D _player;
-		private Navigation2D _nav2d;
 
 		public override void _Ready()
 		{
 			StatesMap.Add("Chase", GetNode("States/Chase"));
-			StatesMap.Add("Stagger", GetNode("States/Stagger"));
+			StatesMap.Add("Exhaust", GetNode("States/Exhaust"));
 			StatesMap.Add("Charge", GetNode("States/Charge"));
 
 			CurrentState = (Chase)GetNode("States/Chase");
@@ -30,8 +29,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			{
 				state.Connect(nameof(State.Finished), this, nameof(ChangeState));
 			}
-
-			_nav2d = GetParent().GetNode<Navigation2D>("Node2D/Navigation2D");
+			
 			_player = GetParent().GetNode<KinematicBody2D>("Player");
 			StateStack.Push((State)StatesMap["Chase"]);
 			ChangeState("Chase");
@@ -43,14 +41,13 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		private void ChangeState(string stateName)
 		{
 			CurrentState.Exit(this);
-
 			if (stateName == "Dead")
 			{
 				QueueFree();
 				return;
 			}
 
-			else if (stateName == "Stagger")
+			else if (stateName == "Exhaust")
 			{
 				StateStack.Push((State)StatesMap[stateName]);
 			}
@@ -66,7 +63,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			// Pass target to Chase State
 			if (stateName == "Chase")
 			{
-				((Chase)CurrentState).Init((Player.Entity)_player, _nav2d);
+				((Chase)CurrentState).Init((Player.Entity)_player);
 			}
 
 			else if (stateName == "Charge")
