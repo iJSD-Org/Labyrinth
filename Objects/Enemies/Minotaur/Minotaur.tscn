@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/Entities/minotaur spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Enemies/Minotaur/States/Charge.cs" type="Script" id=2]
+[ext_resource path="res://Objects/Enemies/Minotaur/States/Chase.cs" type="Script" id=3]
+[ext_resource path="res://Objects/Enemies/Minotaur/States/Exhaust.cs" type="Script" id=4]
+[ext_resource path="res://Objects/Enemies/Minotaur/Entity.cs" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.50341, 5.30872 )
+extents = Vector2( 10.7392, 7.36931 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "charge"
@@ -40,16 +44,18 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Minotaur" type="KinematicBody2D"]
+script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.648914, -1.17984 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 4
-frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.0640259, 2.95541 )
+position = Vector2( -1.55841, 3.86931 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -57,13 +63,30 @@ anims/charge = SubResource( 2 )
 anims/chase = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -0.245538, 2.98154 )
-scale = Vector2( 0.561538, 0.561538 )
+position = Vector2( -0.830536, 4.77228 )
+scale = Vector2( 1.00398, 0.856499 )
 
 [node name="States" type="Node" parent="."]
 
-[node name="Staggered" type="Node" parent="States"]
+[node name="Exhaust" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="ExhaustTimer" type="Timer" parent="States/Exhaust"]
 
 [node name="Chase" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="ChaseTimer" type="Timer" parent="States/Chase"]
+wait_time = 2.0
 
 [node name="Charge" type="Node" parent="States"]
+script = ExtResource( 2 )
+
+[node name="ChargeTimer" type="Timer" parent="States/Charge"]
+wait_time = 2.3
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+[connection signal="timeout" from="States/Exhaust/ExhaustTimer" to="States/Exhaust" method="_on_StaggerTimer_timeout"]
+[connection signal="timeout" from="States/Chase/ChaseTimer" to="States/Chase" method="_on_ChaseTimer_timeout"]
+[connection signal="timeout" from="States/Charge/ChargeTimer" to="States/Charge" method="_on_ChargeTimer_timeout"]
