@@ -25,12 +25,12 @@ namespace Labyrinth.Objects.Player.States
         
         public override void Update(KinematicBody2D host, float delta)
         {
-            _isMoving = Input.IsActionPressed("ui_left") || Input.IsActionPressed("ui_right") || 
-            Input.IsActionPressed("ui_up") || Input.IsActionPressed("ui_down"); 
+            _isMoving = Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right") || 
+            Input.IsActionPressed("move_up") || Input.IsActionPressed("move_down"); 
 
             _playerToMouse = host.GetGlobalMousePosition() - host.GlobalPosition;
             AnimateIdle();
-            if(_isMoving) EmitSignal(nameof(Finished), "Walk"); 
+            if(_isMoving) EmitSignal(nameof(Finished), "Move"); 
         }
 
         private void AnimateIdle()

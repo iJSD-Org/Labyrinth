@@ -41,6 +41,7 @@ namespace Labyrinth.Objects.Player
 
 		private void ChangeState(string stateName)
 		{
+			GD.Print(stateName);
 			CurrentState.Exit(this);
 			if (stateName == "Dead")
 			{
