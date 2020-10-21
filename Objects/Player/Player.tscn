@@ -144,7 +144,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 1.50952, 1.97031 )
+extents = Vector2( 5.9584, 7.10112 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -152,7 +152,7 @@ extents = Vector2( 1.50952, 1.97031 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
@@ -168,7 +168,7 @@ anims/up_left = SubResource( 7 )
 anims/up_right = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.00468349, -0.511843 )
+position = Vector2( -0.135625, -1.07307 )
 shape = SubResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -194,5 +194,5 @@ position = Vector2( -2, -0.7 )
 position = Vector2( 2, -0.7 )
 
 [node name="Torch" parent="." instance=ExtResource( 6 )]
-scale = Vector2( 0.4, 0.4 )
+position = Vector2( 9.04985, 0.455999 )
 [connection signal="timeout" from="ScentTimer" to="." method="AddScent"]

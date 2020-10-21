@@ -23,6 +23,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         { 
            _ray = host.GetNode<RayCast2D>("RayCast2D");
            host.GetNode<AnimationPlayer>("AnimationPlayer").Play("chase");
+           host.GetNode<AudioStreamPlayer2D>("Chase").Play();
         }
 
         public override void Update(KinematicBody2D host, float delta)

@@ -21,6 +21,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
             GetNode<Timer>("ChargeTimer").Start();
             _dir = _player.GlobalPosition - host.GlobalPosition;
             host.GetNode<AnimationPlayer>("AnimationPlayer").Play("charge");
+            host.GetNode<AudioStreamPlayer2D>("Charge").Play();
         }
 
         public override void Update(KinematicBody2D host, float delta)
@@ -34,6 +35,11 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
         {
              GetNode<Timer>("ChargeTimer").Stop();
             EmitSignal(nameof(Finished), "Exhaust"); 
+        }
+
+        public override void Exit(KinematicBody2D host)
+        {
+            host.GetNode<AudioStreamPlayer2D>("Charge").Stop();
         }
     }
 }

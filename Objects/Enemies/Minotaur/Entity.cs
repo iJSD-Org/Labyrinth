@@ -17,6 +17,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 
 		public override void _Ready()
 		{
+			GetNode<AudioStreamPlayer2D>("Roar").Play();
 			StatesMap.Add("Chase", GetNode("States/Chase"));
 			StatesMap.Add("Exhaust", GetNode("States/Exhaust"));
 			StatesMap.Add("Charge", GetNode("States/Charge"));

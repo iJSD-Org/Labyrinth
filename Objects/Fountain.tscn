@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/fountain spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Fountain.cs" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "water"
+length = 0.35
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Fountain" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -30.1106, 24.5573, -29.167, 28.6514, -25.8116, 32.0877, 25.8278, 32.1562, 29.8968, 27.947, 27.7921, 22.1944, 21.0632, 21.9868, 22.0395, 11.8818, 19.9349, 5.98884, 11.0373, 5.96894, 2.64044, 6.3225, 2.90561, -4.10733, 10.1535, -14.272, -11.4133, -13.9184, -2.39769, -3.13506, -2.04414, 5.79217, -19.5736, 5.98406, -22.3937, 7.9308, -20.2189, 21.681 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/water = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 4
