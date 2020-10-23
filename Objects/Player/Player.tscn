@@ -5,7 +5,7 @@
 [ext_resource path="res://Objects/Player/Camera2D.cs" type="Script" id=3]
 [ext_resource path="res://Objects/Player/States/Idle.cs" type="Script" id=4]
 [ext_resource path="res://Objects/Player/States/Move.cs" type="Script" id=5]
-[ext_resource path="res://Objects/Torch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Torch.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle_left"
@@ -144,7 +144,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 5.9584, 7.10112 )
+extents = Vector2( 1.50952, 1.97031 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -152,11 +152,10 @@ extents = Vector2( 5.9584, 7.10112 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
-hframes = 4
 vframes = 4
-frame = 11
+hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle_left = SubResource( 1 )
@@ -169,7 +168,7 @@ anims/up_left = SubResource( 7 )
 anims/up_right = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.135625, -1.07307 )
+position = Vector2( 0.00468349, -0.511843 )
 shape = SubResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -192,8 +191,8 @@ script = ExtResource( 4 )
 position = Vector2( -2, -0.7 )
 
 [node name="TorchRight" type="Position2D" parent="."]
-position = Vector2( 2, -0.7 )
+position = Vector2( 1.8, -0.7 )
 
-[node name="Torch" parent="." instance=ExtResource( 6 )]
-position = Vector2( 9.04985, 0.455999 )
+[node name="Torch" parent="." instance=ExtResource( 7 )]
+scale = Vector2( 0.4, 0.4 )
 [connection signal="timeout" from="ScentTimer" to="." method="AddScent"]

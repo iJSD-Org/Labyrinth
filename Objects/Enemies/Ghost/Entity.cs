@@ -14,7 +14,6 @@ namespace Labyrinth.Objects.Enemies.Ghost
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 		private KinematicBody2D _player;
-
 		public override void _Ready()
 		{
 			StatesMap.Add("Chase", GetNode("States/Chase"));
@@ -38,7 +37,6 @@ namespace Labyrinth.Objects.Enemies.Ghost
 		{
 			CurrentState.Update(this, delta);
 		}
-
 		private void ChangeState(string stateName)
 		{
             GD.Print(stateName);
@@ -68,7 +66,11 @@ namespace Labyrinth.Objects.Enemies.Ghost
 			{
 				((Chase)CurrentState).Init((Player.Entity)_player);
 			}
-
+			//Pass target to Weakened State
+			if (stateName == "Weakened")
+			{
+				((Weakened)CurrentState).Init((Player.Entity)_player);
+			}
 			// We don"t want to reinitialize the state if we"re going back to the previous state
 			if (stateName != "Previous")
 				CurrentState.Enter(this);
@@ -87,6 +89,15 @@ namespace Labyrinth.Objects.Enemies.Ghost
 		{
 			if(body.IsInGroup("player"))
 				ChangeState("Wander");
+		}
+		private void _on_Hitbox_area_entered(Area2D area){
+			if(area.IsInGroup("light")) {
+				ChangeState("Weakened");
+			}
+		}
+		private void _on_Hitbox_area_exited(Area2D area){
+			if(area.IsInGroup("light") == false) ChangeState("Wander");
+
 		}
 	}
 }

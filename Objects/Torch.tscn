@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Sprites/torch spritesheet.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Sprites/torchlight.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/newlight.png" type="Texture" id=2]
 [ext_resource path="res://Objects/Torch.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/torchlight.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "burn"
@@ -30,7 +31,31 @@ script = ExtResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/burn = SubResource( 1 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="PointLight" type="Position2D" parent="."]
+visible = false
+
+[node name="Light" type="Light2D" parent="PointLight"]
+position = Vector2( 0, -25 )
+scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 2 )
-color = Color( 1, 0.4, 0, 1 )
-energy = 0.4
+texture_scale = 0.03
+color = Color( 0.898039, 0.509804, 0.223529, 1 )
+energy = 1.5
+
+[node name="PointLightArea" type="Area2D" parent="PointLight" groups=[
+"light",
+]]
+pause_mode = 1
+position = Vector2( 0.5, -11 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PointLight/PointLightArea"]
+position = Vector2( 0, 9.53674e-07 )
+polygon = PoolVector2Array( -12.1469, 12.5176, -26.9415, -42.249, 25.962, -42.1878, 11.3058, 12.4841, 9.38863, 13.0231, 7.59956, 13.3825, 6.73238, 13.5544, 4.66988, 13.8044, 3.02856, 13.9684, 0.93481, 14.0544, -1.0105, 14.0622, -3.84982, 13.9997, -6.34201, 13.7653, -8.13719, 13.5231, -9.98094, 13.1794, -11.7622, 12.7028, -12.1395, 12.5934 )
+
+[node name="CircleLight" type="Position2D" parent="."]
+
+[node name="Light" type="Light2D" parent="CircleLight"]
+texture = ExtResource( 4 )
+texture_scale = 0.06
+color = Color( 0.898039, 0.509804, 0.223529, 1 )
+energy = 1.5
