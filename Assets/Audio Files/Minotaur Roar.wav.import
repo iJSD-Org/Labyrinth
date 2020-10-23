@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Minotaur Roar.wav-436a8c47fbfc67b587f343dabec9cebb.sample"
+
+[deps]
+
+source_file="res://Assets/Audio Files/Minotaur Roar.wav"
+dest_files=[ "res://.import/Minotaur Roar.wav-436a8c47fbfc67b587f343dabec9cebb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

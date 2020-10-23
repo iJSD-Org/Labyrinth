@@ -9,6 +9,7 @@ namespace Labyrinth.Objects.Player
             SetAsToplevel(true);
 		    SetProcess(false);
         }
+
         public override void _PhysicsProcess(float delta)
         {
             Position = new Vector2(
