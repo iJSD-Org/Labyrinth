@@ -16,8 +16,10 @@ namespace Labyrinth.Objects.Player
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 
+		private Sprite _torch;
 		public override void _Ready()
 		{
+			_torch = GetNode<Sprite>("Torch");
 			StatesMap.Add("Move", GetNode("States/Move"));
 			StatesMap.Add("Idle", GetNode("States/Idle"));
 
