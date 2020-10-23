@@ -1,10 +1,12 @@
 using Godot;
-using System;
 
-public class Campfire : KinematicBody2D
+namespace Labyrinth.Objects
 {
-    public override void _Ready()
-    {
-        GetNode<AnimationPlayer>("AnimationPlayer").Play("burn");
-    }
+	public class Campfire : KinematicBody2D
+	{
+		public override void _Ready()
+		{
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("burn");
+		}
+	}
 }

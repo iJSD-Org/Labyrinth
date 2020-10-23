@@ -66,7 +66,6 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			{
 				((Chase)CurrentState).Init((Player.Entity)_player);
 			}
-
 			else if (stateName == "Charge")
 			{
 				((Charge)CurrentState).Init((Player.Entity)_player);
