@@ -8,11 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[  ]
-_global_script_class_icons={
-
-}
-
 [application]
 
 config/name="Labyrinth"
@@ -60,4 +55,5 @@ move_down={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+environment/default_clear_color=Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 environment/default_environment="res://default_env.tres"

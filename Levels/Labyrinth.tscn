@@ -40,6 +40,7 @@ position = Vector2( 2319.03, 959.52 )
 
 [node name="Player" parent="Node2D" instance=ExtResource( 2 )]
 position = Vector2( 145.212, -149.36 )
+scale = Vector2( 3, 3 )
 
 [node name="KinematicBody2D" parent="Node2D" instance=ExtResource( 3 )]
 position = Vector2( 990.362, 1121.96 )
@@ -58,3 +59,6 @@ position = Vector2( 4014.91, 2394.78 )
 
 [node name="BackgroundNoise" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 0.784314 )
