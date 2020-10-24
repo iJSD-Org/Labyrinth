@@ -14,6 +14,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 		private KinematicBody2D _player;
+		private int _charges;
 
 		public override void _Ready()
 		{
@@ -37,10 +38,12 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 		public override void _PhysicsProcess(float delta)
 		{
 			CurrentState.Update(this, delta);
+			if (_charges == 4 && !GetNode<VisibilityNotifier2D>("VisibilityNotifier2D").IsOnScreen()) ChangeState("Dead");
 		}
 
 		private void ChangeState(string stateName)
 		{
+			GD.Print(stateName);
 			CurrentState.Exit(this);
 			if (stateName == "Dead")
 			{
@@ -68,6 +71,8 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			}
 			else if (stateName == "Charge")
 			{
+				_charges++;
+				if (_charges > 4) _charges = 4;
 				((Charge)CurrentState).Init((Player.Entity)_player);
 			}
 
@@ -78,14 +83,9 @@ namespace Labyrinth.Objects.Enemies.Minotaur
 			EmitSignal(nameof(StateChanged), CurrentState.Name);
 		}
 
-		private void _on_VisibilityNotifier2D_screen_entered()
+		private void _on_ScreenTimer_timeout()
 		{
-			// TODO: do something
-		}
-
-		private void _on_VisibilityNotifier2D_screen_exited()
-		{
-			// TODO: do something
+			ChangeState("Dead");
 		}
 	}
 }

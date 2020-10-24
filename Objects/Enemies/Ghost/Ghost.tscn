@@ -27,12 +27,14 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 70.1238, 58.7132 )
+extents = Vector2( 65.9949, 59.4932 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.38315, 6.23166 )
 
-[node name="Ghost" type="KinematicBody2D"]
+[node name="Ghost" type="KinematicBody2D" groups=[
+"enemy",
+]]
 position = Vector2( 0.0749969, 0.0386009 )
 script = ExtResource( 3 )
 
@@ -58,15 +60,21 @@ script = ExtResource( 2 )
 
 [node name="Chase" type="Node" parent="States"]
 script = ExtResource( 4 )
+MaxSpeed = 180
+Acceleration = 200
 
 [node name="Weakened" type="Node" parent="States"]
 script = ExtResource( 5 )
+
+[node name="WeakenedTimer" type="Timer" parent="States/Weakened"]
+wait_time = 0.5
 
 [node name="SpookAudio" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.528488, -0.0289993 )
 shape = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -74,6 +82,7 @@ shape = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 4 )
 [connection signal="timeout" from="States/Wander/WanderTimer" to="States/Wander" method="_on_WanderTimer_timeout"]
+[connection signal="timeout" from="States/Weakened/WeakenedTimer" to="States/Weakened" method="_on_WeakenedTimer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

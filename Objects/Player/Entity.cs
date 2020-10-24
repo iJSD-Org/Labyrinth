@@ -11,7 +11,6 @@ namespace Labyrinth.Objects.Player
 
 		public PackedScene ScentScene = ResourceLoader.Load<PackedScene>("res://Objects/Player/Scent.tscn");
 		public List<Scent> ScentTrail = new List<Scent>();
-
 		public State CurrentState;
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
@@ -41,11 +40,11 @@ namespace Labyrinth.Objects.Player
 
 		private void ChangeState(string stateName)
 		{
-			GD.Print(stateName);
 			CurrentState.Exit(this);
 			if (stateName == "Dead")
 			{
-				QueueFree();
+				Engine.TimeScale = .3f;
+				GetNode<AnimationPlayer>("FadePlayer").Play("FadeOut");
 				return;
 			}
 			else
@@ -65,12 +64,27 @@ namespace Labyrinth.Objects.Player
 		
 		public void AddScent()
 		{
-			Scent scent = (Scent)ScentScene.Instance();
-			scent.Position = Position;
-			GetTree().Root.AddChild(scent);
+			if(CurrentState != (Idle)GetNode("States/Idle"))
+			{
+				Scent scent = (Scent)ScentScene.Instance();
+				scent.Position = Position;
+				GetTree().Root.AddChild(scent);
 
-			scent.Init(this);
-			ScentTrail.Add(scent);
+				scent.Init(this);
+				ScentTrail.Add(scent);
+			}
+		}
+
+		public void _on_Area2D_body_entered(KinematicBody2D area)
+		{
+			if(area.IsInGroup("enemy"))
+				ChangeState("Dead");
+		}
+
+		private void _on_FadePlayer_finished(string animation)
+		{
+			Engine.TimeScale = 1f;
+			GetTree().ChangeScene("res://Levels/DeathScreen.tscn");
 		}
 	}
 }

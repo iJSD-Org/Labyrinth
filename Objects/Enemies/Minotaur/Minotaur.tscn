@@ -47,7 +47,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="Minotaur" type="KinematicBody2D"]
+[node name="Minotaur" type="KinematicBody2D" groups=[
+"enemy",
+]]
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -67,8 +69,8 @@ anims/charge = SubResource( 2 )
 anims/chase = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0.00732899, 3.11831 )
-scale = Vector2( 2.91965, 2.50422 )
+position = Vector2( -0.389628, 5.71416 )
+scale = Vector2( 0.896948, 0.89295 )
 
 [node name="States" type="Node" parent="."]
 
@@ -79,12 +81,15 @@ script = ExtResource( 4 )
 
 [node name="Chase" type="Node" parent="States"]
 script = ExtResource( 3 )
+Speed = 65
 
 [node name="ChaseTimer" type="Timer" parent="States/Chase"]
-wait_time = 2.0
+wait_time = 5.0
 
 [node name="Charge" type="Node" parent="States"]
 script = ExtResource( 2 )
+Acceleration = 830
+MaxSpeed = 250
 
 [node name="ChargeTimer" type="Timer" parent="States/Charge"]
 wait_time = 2.3
@@ -95,16 +100,22 @@ enabled = true
 [node name="Chase" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0.264862, 5.95948 )
 stream = ExtResource( 7 )
+pitch_scale = 0.6
 
 [node name="Charge" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0.132431, 6.48921 )
 stream = ExtResource( 6 )
+pitch_scale = 0.6
 
 [node name="Roar" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0.132439, 6.35678 )
 stream = ExtResource( 8 )
 volume_db = 1.0
-pitch_scale = 0.7
+pitch_scale = 0.5
+
+[node name="ScreenTimer" type="Timer" parent="."]
+wait_time = 40.0
 [connection signal="timeout" from="States/Exhaust/ExhaustTimer" to="States/Exhaust" method="_on_StaggerTimer_timeout"]
 [connection signal="timeout" from="States/Chase/ChaseTimer" to="States/Chase" method="_on_ChaseTimer_timeout"]
 [connection signal="timeout" from="States/Charge/ChargeTimer" to="States/Charge" method="_on_ChargeTimer_timeout"]
+[connection signal="timeout" from="ScreenTimer" to="." method="_on_ScreenTimer_timeout"]
