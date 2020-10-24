@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Jeebz-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Jeebz-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Objects/Pause.cs" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="Pause" type="CanvasLayer"]
+pause_mode = 2
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Click Esc to Continue" type="Label" parent="Control"]
+margin_left = 50.0
+margin_top = 79.5
+margin_right = 222.0
+margin_bottom = 89.5
+custom_fonts/font = SubResource( 1 )
+text = "Click Esc to Continue"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Paused" type="Label" parent="Control"]
+margin_left = 50.315
+margin_top = 60.5
+margin_right = 222.315
+margin_bottom = 79.5
+custom_fonts/font = SubResource( 2 )
+text = "Paused"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

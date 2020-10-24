@@ -12,7 +12,7 @@ namespace Labyrinth.Levels.Arena
         private PackedScene _minotaur = (PackedScene)ResourceLoader.Load("res://Objects/Enemies/Minotaur/Minotaur.tscn"); 
         public override void _Ready()
         {
-
+            GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
         }
 
         private void _on_MinotaurSpawnTimer_timeout()
