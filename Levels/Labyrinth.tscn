@@ -294,7 +294,7 @@ autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 scale = Vector2( 1.06259, 0.802122 )
-color = Color( 0.415686, 0.415686, 0.415686, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="MinotaurSpawnTimer" type="Timer" parent="."]
 wait_time = 50.0
@@ -302,5 +302,6 @@ autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
 autostart = true
+
 [connection signal="timeout" from="MinotaurSpawnTimer" to="." method="_on_MinotaurSpawnTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

@@ -2,7 +2,7 @@ using Godot;
 
 namespace Labyrinth.Levels
 {
-	public class MainMenu : Node2D
+	public class MainMenu : Control
 	{
 		public override void _Ready()
 		{
