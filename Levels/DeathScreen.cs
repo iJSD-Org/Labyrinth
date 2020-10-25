@@ -18,6 +18,7 @@ namespace Labyrinth.Levels
 
         private void _on_AnimationPlayer_animation_finished(string animation)
         {
+            Globals.PlayerScore = 0;
             if (animation == "FadeOut") GetTree().ChangeScene("res://Levels/MainMenu.tscn");
         }
     }   

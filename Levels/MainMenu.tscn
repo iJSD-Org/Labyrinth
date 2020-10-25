@@ -5,7 +5,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Jeebz-Bold.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 float rand(vec2 n) {
@@ -29,21 +29,21 @@ void fragment(){
 	COLOR = vec4(r,r,r,UV.y);
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 12
-font_data = ExtResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="DynamicFont" id=5]
+size = 12
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=6]
 resource_name = "Fade In"
 length = 3.0
 tracks/0/type = "value"
@@ -59,8 +59,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Fade Out"
+[sub_resource type="Animation" id=7]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -91,7 +90,7 @@ __meta__ = {
 
 [node name="Fog" type="TextureRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.666667 )
-material = SubResource( 5 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.264862
@@ -110,7 +109,7 @@ margin_left = -46.5
 margin_top = 23.0
 margin_right = 46.5
 margin_bottom = 42.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Labyrinth"
 align = 1
 valign = 1
@@ -127,7 +126,7 @@ margin_left = -22.5
 margin_top = 12.0
 margin_right = 22.5
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Start"
 flat = true
 __meta__ = {
@@ -143,7 +142,7 @@ margin_left = -18.0
 margin_top = 32.0
 margin_right = 18.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "Quit"
 flat = true
 __meta__ = {
@@ -151,8 +150,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Fade In" = SubResource( 7 )
-"anims/Fade Out" = SubResource( 6 )
+"anims/Fade In" = SubResource( 6 )
+"anims/Fade Out" = SubResource( 7 )
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

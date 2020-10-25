@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/Audio Files/Minotaur Roar.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.08109, 9.13069 )
+extents = Vector2( 9.84372, 10.4389 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "charge"
@@ -56,12 +56,12 @@ script = ExtResource( 5 )
 position = Vector2( -0.648914, -1.17984 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
-vframes = 2
 hframes = 4
+vframes = 2
 frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.747342, 5.28832 )
+position = Vector2( 1.25839, 4.6984 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -115,6 +115,7 @@ pitch_scale = 0.5
 
 [node name="ScreenTimer" type="Timer" parent="."]
 wait_time = 40.0
+
 [connection signal="timeout" from="States/Exhaust/ExhaustTimer" to="States/Exhaust" method="_on_StaggerTimer_timeout"]
 [connection signal="timeout" from="States/Chase/ChaseTimer" to="States/Chase" method="_on_ChaseTimer_timeout"]
 [connection signal="timeout" from="States/Charge/ChargeTimer" to="States/Charge" method="_on_ChargeTimer_timeout"]

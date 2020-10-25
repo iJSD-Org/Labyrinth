@@ -19,9 +19,9 @@ namespace Labyrinth.Levels.Arena
         {
             if(GetTree().Root.GetNode<Node2D>("Scent") != null && GetNode<KinematicBody2D>("Node2D/Minotaur") == null) 
             {
-                 Entity minotaurInstance = (Entity)_minotaur.Instance();
-                 minotaurInstance.Position = GetTree().Root.GetNode<Node2D>("Scent").Position;
-                 GetNode<Node2D>("Node2D").AddChild(minotaurInstance);
+                Entity minotaurInstance = (Entity)_minotaur.Instance();
+                minotaurInstance.Position = GetTree().Root.GetNode<Node2D>("Scent").Position;
+                GetNode<Node2D>("Node2D").AddChild(minotaurInstance);
             }
             GetNode<Timer>("MinotaurSpawnTimer").Stop();
             GetNode<Timer>("MinotaurSpawnTimer").WaitTime = (float)(_random.NextDouble() * (110 - 40) + 40);
