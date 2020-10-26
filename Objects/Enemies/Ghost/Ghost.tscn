@@ -60,8 +60,8 @@ script = ExtResource( 2 )
 
 [node name="Chase" type="Node" parent="States"]
 script = ExtResource( 4 )
-MaxSpeed = 180
-Acceleration = 200
+MaxSpeed = 110
+Acceleration = 110
 
 [node name="Weakened" type="Node" parent="States"]
 script = ExtResource( 5 )
