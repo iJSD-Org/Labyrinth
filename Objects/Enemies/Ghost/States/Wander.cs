@@ -5,7 +5,7 @@ namespace Labyrinth.Objects.Enemies.Ghost.States
 {
 	public class Wander : State
 	{
-		[Export] public int Speed = 20;
+		[Export] public int Speed;
 
 		private Vector2 _direction;
 		private Timer _wanderTimer;

@@ -1,0 +1,181 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Jeebz-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Sprites/Logo WHITE.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/iJSD_logo.png" type="Texture" id=3]
+[ext_resource path="res://Levels/Tutorial.cs" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fadein"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="Introduction" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.5
+margin_right = -0.5
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Control" parent="."]
+margin_right = 273.0
+margin_bottom = 155.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Text"]
+visible = false
+margin_left = 13.1345
+margin_top = 59.4081
+margin_right = 261.134
+margin_bottom = 96.4081
+custom_fonts/font = SubResource( 1 )
+text = "Headphones are recommended
+for the full experience..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Text"]
+visible = false
+margin_left = 13.1345
+margin_top = 64.4535
+margin_right = 261.134
+margin_bottom = 83.4535
+custom_fonts/font = SubResource( 1 )
+text = "The labyrinth is a dangerous place"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="3" type="Label" parent="Text"]
+visible = false
+margin_left = 13.1345
+margin_top = 64.4535
+margin_right = 261.134
+margin_bottom = 83.4535
+custom_fonts/font = SubResource( 1 )
+text = "Heed this advice to get out alive..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="4" type="Label" parent="Text"]
+visible = false
+margin_left = 13.3958
+margin_top = 61.942
+margin_right = 261.396
+margin_bottom = 98.942
+custom_fonts/font = SubResource( 1 )
+text = "Move slowly...
+Vengeful spirits are everywhere"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="5" type="Label" parent="Text"]
+visible = false
+margin_left = 12.0549
+margin_top = 41.2263
+margin_right = 260.055
+margin_bottom = 118.226
+custom_fonts/font = SubResource( 1 )
+text = "Hold shift or
+the left mouse click to shine
+your torch on ghosts...
+it slows them down"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="6" type="Label" parent="Text"]
+visible = false
+margin_left = 10.1345
+margin_top = 53.9535
+margin_right = 258.134
+margin_bottom = 110.954
+custom_fonts/font = SubResource( 1 )
+text = "The minotaur will catch up on you
+occassionally..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="7" type="Label" parent="Text"]
+visible = false
+margin_left = 10.6345
+margin_top = 47.9535
+margin_right = 258.634
+margin_bottom = 104.954
+custom_fonts/font = SubResource( 1 )
+text = "Don't let him charge at you,
+lose sight of him long enough 
+and he will be gone..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="iACADEMY" type="Sprite" parent="Logo"]
+position = Vector2( 110.343, 78.254 )
+scale = Vector2( 0.013, 0.013 )
+texture = ExtResource( 2 )
+
+[node name="iJSD" type="Sprite" parent="Logo"]
+position = Vector2( 163.729, 76.1728 )
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fadein = SubResource( 2 )
+anims/fadeout = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 272.0
+margin_bottom = 155.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.5
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -23,14 +23,9 @@ namespace Labyrinth.Objects
 		private string _token;
 		private readonly HTTPRequest _request = new HTTPRequest();
 
-		public override async void _Ready()
+		public override void _Ready()
 		{
-			OS.WindowMinimized = true;
 			AddChild(_request);
-			await DiscordAuthAsync("http://localhost:8910/callback/");
-			OS.WindowMaximized = true;
-			OS.WindowFullscreen = true;
-			GetTree().CurrentScene.GetNode<Control>("Pause/Control").Visible = false;
 		}
 
 		public async Task DiscordAuthAsync(string prefix)

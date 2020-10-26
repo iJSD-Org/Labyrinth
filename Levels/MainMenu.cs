@@ -6,12 +6,20 @@ namespace Labyrinth.Levels
 {
 	public class MainMenu : Control
 	{
-		public override void _Ready()
+		public override async void _Ready()
 		{
-			((Globals)GetNode("/root/Globals")).PlayerScore = 0;
+			Globals globals = (Globals)GetNode("/root/Globals");
+			globals.PlayerScore = 0;
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
-			if (((Globals)GetNode("/root/Globals")).DiscordTag != null)
-				GetTree().CurrentScene.GetNode<Control>("Pause/Control").Visible = false;
+			if (globals.DiscordTag is null)
+			{
+
+				OS.WindowMinimized = true;
+				await globals.DiscordAuthAsync("http://localhost:8910/callback/");
+				OS.WindowMaximized = true;
+				OS.WindowFullscreen = true;
+			}
+			GetNode<Control>("Pause/Control").Visible = false;
 		}
 
 		private void _on_Quit_pressed()
