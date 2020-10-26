@@ -176,5 +176,6 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.5
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
