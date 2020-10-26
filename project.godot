@@ -25,7 +25,6 @@ Globals="*res://Objects/Globals.cs"
 window/size/width=272
 window/size/height=153
 window/size/resizable=false
-window/size/always_on_top=true
 window/size/test_width=1280
 window/size/test_height=720
 window/vsync/use_vsync=false
