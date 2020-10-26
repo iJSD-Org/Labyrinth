@@ -161,7 +161,6 @@ visible = true
 
 [node name="Click Esc to Continue" parent="Pause/Control" index="1"]
 text = "Authorize to Discord to continue."
-
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
