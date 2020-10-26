@@ -10,6 +10,8 @@ namespace Labyrinth.Levels
 		{
 			((Globals)GetNode("/root/Globals")).PlayerScore = 0;
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
+			if (((Globals)GetNode("/root/Globals")).DiscordTag != null)
+				GetTree().CurrentScene.GetNode<Control>("Pause/Control").Visible = false;
 		}
 
 		private void _on_Quit_pressed()

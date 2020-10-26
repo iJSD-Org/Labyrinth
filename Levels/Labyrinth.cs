@@ -1,7 +1,6 @@
 using System;
 using Godot;
 using Labyrinth.Objects;
-using Labyrinth.Objects.Player;
 using Entity = Labyrinth.Objects.Enemies.Minotaur.Entity;
 
 namespace Labyrinth.Levels
