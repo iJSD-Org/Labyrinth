@@ -9,7 +9,7 @@ namespace Labyrinth.Levels
         public override void _Ready()
         {
             GetNode<AnimationPlayer>("AnimationPlayer").Play("fadein");
-            GetNode<Label>("ScoreLabel").Text = $"Time: {Globals.PlayerScore} seconds";
+            GetNode("VBoxContainer").GetNode<Label>("ScoreLabel").Text = $"Time: {Globals.PlayerScore} seconds";
         }
 
         private void _on_Timer_timeout()

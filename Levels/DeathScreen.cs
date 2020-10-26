@@ -3,12 +3,12 @@ using Labyrinth.Objects.Player.Globals;
 
 namespace Labyrinth.Levels
 {
-    public class DeathScreen : Node2D
+    public class DeathScreen : Control
     {
         public override void _Ready()
         {
             GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeIn");
-            GetNode<Label>("ScoreLabel").Text = $"{Globals.PlayerScore} seconds...";
+            GetNode("VBoxContainer").GetNode<Label>("ScoreLabel").Text = $"{Globals.PlayerScore} seconds...";
         }
 
         private void _on_Timer_timeout()
