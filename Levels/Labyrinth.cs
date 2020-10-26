@@ -28,6 +28,13 @@ namespace Labyrinth.Levels.Arena
             GetNode<Timer>("MinotaurSpawnTimer").Start();
         }
 
+        private void _on_Exit_body_entered(KinematicBody2D body)
+        {
+            if (body.IsInGroup("player"))
+            {
+                GetTree().ChangeScene("res://Levels/WinScreen.tscn");
+            }
+        }
         private void _on_ScoreTimer_timeout()
         {
             //Score is in seconds

@@ -1,4 +1,5 @@
 using Godot;
+using Labyrinth.Objects.Player.Globals;
 
 namespace Labyrinth.Levels
 {
@@ -6,6 +7,7 @@ namespace Labyrinth.Levels
 	{
 		public override void _Ready()
 		{
+			Globals.PlayerScore = 0;
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
 		}
 		private void _on_Quit_pressed()
