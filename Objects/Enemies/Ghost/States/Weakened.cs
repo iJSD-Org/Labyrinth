@@ -5,7 +5,7 @@ namespace Labyrinth.Objects.Enemies.Ghost.States
 {
 	public class Weakened : State
 	{
-		[Export] private const float Speed = 20;
+		[Export] private readonly float Speed = 20;
 		private Vector2 _dir = Vector2.Zero;
 		private KinematicBody2D _player;
 

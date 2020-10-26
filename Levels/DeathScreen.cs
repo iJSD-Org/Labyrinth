@@ -1,4 +1,5 @@
 using Godot;
+using Labyrinth.Objects;
 using Labyrinth.Objects.Player;
 
 namespace Labyrinth.Levels
@@ -8,7 +9,7 @@ namespace Labyrinth.Levels
 		public override void _Ready()
 		{
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeIn");
-			GetNode("VBoxContainer").GetNode<Label>("ScoreLabel").Text = $"{Globals.PlayerScore} seconds...";
+			GetNode("VBoxContainer").GetNode<Label>("ScoreLabel").Text = $"{((Globals)GetNode("/root/Globals")).PlayerScore} seconds...";
 		}
 
 		private void _on_Timer_timeout()
@@ -18,7 +19,7 @@ namespace Labyrinth.Levels
 
 		private void _on_AnimationPlayer_animation_finished(string animation)
 		{
-			Globals.PlayerScore = 0;
+			((Globals)GetNode("/root/Globals")).PlayerScore = 0;
 			if (animation == "FadeOut") GetTree().ChangeScene("res://Levels/MainMenu.tscn");
 		}
 	}

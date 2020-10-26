@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Labyrinth.Objects;
 using Labyrinth.Objects.Player;
 using Entity = Labyrinth.Objects.Enemies.Minotaur.Entity;
 
@@ -39,7 +40,7 @@ namespace Labyrinth.Levels
 		private void _on_ScoreTimer_timeout()
 		{
 			//Score is in seconds
-			Globals.PlayerScore += 1;
+			((Globals)GetNode("/root/Globals")).PlayerScore += 1;
 		}
 	}
 }
