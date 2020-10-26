@@ -1,7 +1,6 @@
 using Godot;
-using System;
 
-namespace Labyrinth.Objects.Player.Globals
+namespace Labyrinth.Objects.Player
 {
     public class Globals : Node
     {

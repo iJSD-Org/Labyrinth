@@ -15,10 +15,9 @@ namespace Labyrinth.Objects.Player
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 
-		private Sprite _torch;
 		public override void _Ready()
 		{
-			_torch = GetNode<Sprite>("Torch");
+			GetNode<Sprite>("Torch");
 			StatesMap.Add("Move", GetNode("States/Move"));
 			StatesMap.Add("Idle", GetNode("States/Idle"));
 
@@ -31,11 +30,11 @@ namespace Labyrinth.Objects.Player
 
 			StateStack.Push((State)StatesMap["Idle"]);
 			ChangeState("Idle");
-		}     
+		}
 
 		public override void _PhysicsProcess(float delta)
 		{
-			CurrentState.Update(this, delta);                    
+			CurrentState.Update(this, delta);
 		}
 
 		private void ChangeState(string stateName)
@@ -61,10 +60,10 @@ namespace Labyrinth.Objects.Player
 
 			EmitSignal(nameof(StateChanged), CurrentState.Name);
 		}
-		
+
 		public void AddScent()
 		{
-			if(CurrentState != (Idle)GetNode("States/Idle"))
+			if (CurrentState != (Idle)GetNode<Node>("States/Idle"))
 			{
 				Scent scent = (Scent)ScentScene.Instance();
 				scent.Position = Position;
@@ -77,11 +76,11 @@ namespace Labyrinth.Objects.Player
 
 		public void _on_Area2D_body_entered(KinematicBody2D area)
 		{
-			if(area.IsInGroup("enemy"))
+			if (area.IsInGroup("enemy"))
 				ChangeState("Dead");
 		}
 
-		private void _on_FadePlayer_finished(string animation)
+		private void _on_FadePlayer_finished(string anim)
 		{
 			Engine.TimeScale = 1f;
 			GetTree().ChangeScene("res://Levels/DeathScreen.tscn");

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Labyrinth.Objects.Enemies.Ghost.States;
 using Godot;
@@ -14,7 +13,8 @@ namespace Labyrinth.Objects.Enemies.Ghost
 		public Stack<State> StateStack = new Stack<State>();
 		public readonly Dictionary<string, Node> StatesMap = new Dictionary<string, Node>();
 		private KinematicBody2D _player;
-		private bool canChase = false;
+		private bool _canChase;
+
 		public override void _Ready()
 		{
 			StatesMap.Add("Chase", GetNode("States/Chase"));
@@ -24,7 +24,7 @@ namespace Labyrinth.Objects.Enemies.Ghost
 			CurrentState = (Wander)GetNode("States/Wander");
 
 			_player = GetParent().GetParent().GetNode<KinematicBody2D>("Player");
-			
+
 			foreach (Node state in StatesMap.Values)
 			{
 				state.Connect(nameof(State.Finished), this, nameof(ChangeState));
@@ -80,26 +80,26 @@ namespace Labyrinth.Objects.Enemies.Ghost
 
 		private void _on_Area2D_body_entered(KinematicBody2D body)
 		{
-			if(body.IsInGroup("player"))
+			if (body.IsInGroup("player"))
 			{
-				canChase = true;
+				_canChase = true;
 				GetNode<Timer>("States/Wander/WanderTimer").Stop();
-				ChangeState("Chase");	
+				ChangeState("Chase");
 			}
 		}
 
 		private void _on_Area2D_body_exited(KinematicBody2D body)
 		{
-			if(body.IsInGroup("player"))
+			if (body.IsInGroup("player"))
 			{
-				canChase = false;
+				_canChase = false;
 				ChangeState("Wander");
 			}
 		}
 
 		private void _on_Hitbox_area_entered(Area2D area)
 		{
-			if(area.IsInGroup("light")) 
+			if (area.IsInGroup("light"))
 			{
 				ChangeState("Weakened");
 			}
@@ -107,7 +107,7 @@ namespace Labyrinth.Objects.Enemies.Ghost
 
 		private void _on_Hitbox_area_exited(Area2D area)
 		{
-			if(area.IsInGroup("light") == false && !canChase) ChangeState("Wander"); 
+			if (area.IsInGroup("light") == false && !_canChase) ChangeState("Wander");
 			else ChangeState("Chase");
 		}
 	}

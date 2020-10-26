@@ -1,5 +1,5 @@
 using Godot;
-using Labyrinth.Objects.Player.Globals;
+using Labyrinth.Objects.Player;
 
 namespace Labyrinth.Levels
 {
@@ -10,17 +10,20 @@ namespace Labyrinth.Levels
 			Globals.PlayerScore = 0;
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
 		}
+
 		private void _on_Quit_pressed()
 		{
 			GetTree().Quit();
 		}
+
 		private void _on_Start_pressed()
 		{
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade Out");
 		}
+
 		private void _on_AnimationPlayer_animation_finished(string animName)
 		{
-			if(animName == "Fade Out") GetTree().ChangeScene("res://Levels/Labyrinth.tscn");
+			if (animName == "Fade Out") GetTree().ChangeScene("res://Levels/Labyrinth.tscn");
 		}
 	}
 }

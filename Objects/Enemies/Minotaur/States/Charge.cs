@@ -1,5 +1,4 @@
 using Godot;
-using Labyrinth.Objects.Player;
 
 namespace Labyrinth.Objects.Enemies.Minotaur.States
 {

@@ -10,7 +10,6 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 		private Player.Entity _target;
 		private readonly Random _random = new Random();
 		private Vector2 _direction = Vector2.Zero;
-		private VisibilityNotifier2D _onScreen;
 		private RayCast2D _look;
 
 		public void Init(Player.Entity target)
@@ -23,7 +22,6 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 		public override void Enter(KinematicBody2D host)
 		{
 			_look = host.GetNode<RayCast2D>("RayCast2D");
-			_onScreen = host.GetNode<VisibilityNotifier2D>("VisibilityNotifier2D");
 			host.GetNode<AnimationPlayer>("AnimationPlayer").Play("chase");
 			host.GetNode<AudioStreamPlayer2D>("Chase").Play();
 		}

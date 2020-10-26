@@ -1,14 +1,16 @@
 using Godot;
-using System;
 
-public class Pause : Control
+namespace Labyrinth.Objects
 {
-    public override void _Input(InputEvent @event)
+	public class Pause : Control
 	{
-		if(Input.IsActionJustPressed("esc"))
+		public override void _Input(InputEvent @event)
 		{
-			GetTree().Paused = !GetTree().Paused;
-			Visible = GetTree().Paused;
+			if(Input.IsActionJustPressed("esc"))
+			{
+				GetTree().Paused = !GetTree().Paused;
+				Visible = GetTree().Paused;
+			}
 		}
 	}
 }
