@@ -1,5 +1,4 @@
 using Godot;
-using Labyrinth.Objects.Player;
 
 namespace Labyrinth.Objects.Enemies.Minotaur.States
 {
@@ -14,6 +13,7 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 
 		public void Init(Player.Entity target)
 		{
+			Speed = 0;
 			_target = target;
 		}
 
@@ -30,7 +30,6 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 			Speed += Acceleration * delta;
 			if (Speed > MaxSpeed) Speed = MaxSpeed;
 
-			ChaseTarget(host);
 			host.MoveAndSlide(_direction.Normalized() * Speed);
 		}
 
@@ -43,35 +42,6 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 		{
 			GetNode<Timer>("ChargeTimer").Stop();
 			EmitSignal(nameof(Finished), "Exhaust");
-		}
-
-		private void ChaseTarget(KinematicBody2D host)
-		{
-			RayCast2D look = host.GetNode<RayCast2D>("RayCast2D");
-
-			if (_target != null) look.CastTo = _target.Position - host.Position;
-			look.ForceRaycastUpdate();
-
-			// if we can see the target, chase it
-			if (!look.IsColliding() || ((Node)look.GetCollider()).IsInGroup("player"))
-			{
-				_direction = look.CastTo.Normalized();
-			}
-			// or chase the first scent we see
-			else
-			{
-				foreach (Scent scent in _target.ScentTrail)
-				{
-					look.CastTo = scent.Position - host.Position;
-					look.ForceRaycastUpdate();
-
-					if (!look.IsColliding() || ((Node)look.GetCollider()).IsInGroup("player"))
-					{
-						_direction = look.CastTo.Normalized();
-						break;
-					}
-				}
-			}
 		}
 	}
 }

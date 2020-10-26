@@ -10,16 +10,18 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 		private Player.Entity _target;
 		private readonly Random _random = new Random();
 		private Vector2 _direction = Vector2.Zero;
+		private RayCast2D _look;
 
 		public void Init(Player.Entity target)
 		{
 			_target = target;
 			GetNode<Timer>("ChaseTimer").Start();
-			GetNode<Timer>("ChaseTimer").WaitTime = (float)(_random.NextDouble() * (2.5 - 1.5) + 1.5);
+			GetNode<Timer>("ChaseTimer").WaitTime = (float)(_random.NextDouble() * (4.5 - 2.5) + 2.5);
 		}
 
 		public override void Enter(KinematicBody2D host)
 		{
+			_look = host.GetNode<RayCast2D>("RayCast2D");
 			host.GetNode<AnimationPlayer>("AnimationPlayer").Play("chase");
 			host.GetNode<AudioStreamPlayer2D>("Chase").Play();
 		}
@@ -31,28 +33,26 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 		}
 
 		private void ChaseTarget(KinematicBody2D host)
-		{
-			RayCast2D look = host.GetNode<RayCast2D>("RayCast2D");
-
-			if (_target != null) look.CastTo = _target.Position - host.Position;
-			look.ForceRaycastUpdate();
+		{		
+			if (_target != null) _look.CastTo = _target.Position - host.Position;
+			_look.ForceRaycastUpdate();
 
 			// if we can see the target, chase it
-			if (!look.IsColliding() || ((Node)look.GetCollider()).IsInGroup("player"))
+			if (!_look.IsColliding() || ((Node)_look.GetCollider()).IsInGroup("player"))
 			{
-				_direction = look.CastTo.Normalized();
+				_direction = _look.CastTo.Normalized();
 			}
 			// or chase the first scent we see
 			else
 			{
 				foreach (Scent scent in _target.ScentTrail)
 				{
-					look.CastTo = scent.Position - host.Position;
-					look.ForceRaycastUpdate();
+					_look.CastTo = scent.Position - host.Position;
+					_look.ForceRaycastUpdate();
 
-					if (!look.IsColliding() || ((Node)look.GetCollider()).IsInGroup("player"))
+					if (!_look.IsColliding() || ((Node)_look.GetCollider()).IsInGroup("player"))
 					{
-						_direction = look.CastTo.Normalized();
+						_direction = _look.CastTo.Normalized();
 						break;
 					}
 				}
@@ -61,17 +61,15 @@ namespace Labyrinth.Objects.Enemies.Minotaur.States
 
 		private void _on_ChaseTimer_timeout()
 		{
-			RayCast2D look = GetOwner<KinematicBody2D>().GetNode<RayCast2D>("RayCast2D");
-
 			GetNode<Timer>("ChaseTimer").Stop();
 
-			if (!look.IsColliding() || ((Node)look.GetCollider()).IsInGroup("player"))
+			if (!_look.IsColliding() || ((Node)_look.GetCollider()).IsInGroup("player"))
 			{
 				EmitSignal(nameof(Finished), "Charge");
 			}
 			else
 			{
-				GetNode<Timer>("ChaseTimer").Start();
+				EmitSignal(nameof(Finished), "Chase");
 			}
 		}
 	}

@@ -1,64 +1,54 @@
 using Godot;
-using System;
 
 namespace Labyrinth.Objects.Player.States
 {
-    public class Idle : State
-    {
-        private AnimationPlayer _animPlayer;
-        private bool _isMoving;
-        private Vector2 _velocity;
-        private Vector2 _playerToMouse;
-        private Position2D _torch;
-        private Position2D _torchRight;
-        private Position2D _torchLeft;
-        private Sprite _torchSprite;
-        
-        public override void Enter(KinematicBody2D host)
-        { 
-            _animPlayer = host.GetNode<AnimationPlayer>("AnimationPlayer");
-            _torch = host.GetNode<Sprite>("Torch").GetNode<Position2D>("CircleLight");
-            _torchLeft = host.GetNode<Position2D>("TorchLeft");
-            _torchRight = host.GetNode<Position2D>("TorchRight");
-            _torchSprite = host.GetNode<Sprite>("Torch");
-        }
-        
-        public override void Update(KinematicBody2D host, float delta)
-        {
-            _isMoving = Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right") || 
-            Input.IsActionPressed("move_up") || Input.IsActionPressed("move_down"); 
+	public class Idle : State
+	{
+		public override void Update(KinematicBody2D host, float delta)
+		{
+			bool isMoving = Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right") ||
+			Input.IsActionPressed("move_up") || Input.IsActionPressed("move_down");
 
-            _playerToMouse = host.GetGlobalMousePosition() - host.GlobalPosition;
-            AnimateIdle();
-            if(_isMoving) EmitSignal(nameof(Finished), "Move"); 
-        }
+			AnimateIdle(host);
+			if (isMoving) EmitSignal(nameof(Finished), "Move");
+		}
 
-        private void AnimateIdle()
-        {
-            if (_playerToMouse.x > 0 && _playerToMouse.y > -5) 
-            { 
-                _animPlayer.Play("idle_right"); 
-                _torchSprite.Position = _torchRight.Position;
-                _torch.RotationDegrees = 25;
-            }
-            else if (_playerToMouse.x < 0 && _playerToMouse.y > -5)
-            {
-                _animPlayer.Play("idle_left");
-                _torchSprite.Position = _torchLeft.Position;
-                _torch.RotationDegrees = -25;
-            }  
-            else if (_playerToMouse.x > 0 && _playerToMouse.y <= -5) 
-            {
-                _animPlayer.Play("idle_up_right");
-                _torchSprite.Position = _torchRight.Position;
-                _torch.RotationDegrees = 25;
-            }
-            else if (_playerToMouse.x < 0 && _playerToMouse.y <= -5) 
-            {
-                _animPlayer.Play("idle_up_left");
-                _torchSprite.Position = _torchLeft.Position;
-                _torch.RotationDegrees = -25;
-            }
-        }
-    }
+		private void AnimateIdle(KinematicBody2D host)
+		{
+			AnimationPlayer animPlayer = host.GetNode<AnimationPlayer>("AnimationPlayer");
+
+			Position2D torch = host.GetNode<Sprite>("Torch").GetNode<Position2D>("CircleLight");
+			Position2D torchLeft = host.GetNode<Position2D>("TorchLeft");
+			Position2D torchRight = host.GetNode<Position2D>("TorchRight");
+
+			Sprite torchSprite = host.GetNode<Sprite>("Torch");
+
+			Vector2 playerToMouse = host.GetGlobalMousePosition() - host.GlobalPosition;
+
+			if (playerToMouse.x > 0 && playerToMouse.y > -5)
+			{
+				animPlayer.Play("idle_right");
+				torchSprite.Position = torchRight.Position;
+				torch.RotationDegrees = 25;
+			}
+			else if (playerToMouse.x < 0 && playerToMouse.y > -5)
+			{
+				animPlayer.Play("idle_left");
+				torchSprite.Position = torchLeft.Position;
+				torch.RotationDegrees = -25;
+			}
+			else if (playerToMouse.x > 0 && playerToMouse.y <= -5)
+			{
+				animPlayer.Play("idle_up_right");
+				torchSprite.Position = torchRight.Position;
+				torch.RotationDegrees = 25;
+			}
+			else if (playerToMouse.x < 0 && playerToMouse.y <= -5)
+			{
+				animPlayer.Play("idle_up_left");
+				torchSprite.Position = torchLeft.Position;
+				torch.RotationDegrees = -25;
+			}
+		}
+	}
 }

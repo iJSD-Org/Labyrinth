@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Whisper3.wav-a37a93995e46c61a4590a10a9aa88dbe.sample"
+
+[deps]
+
+source_file="res://Assets/Audio Files/Whisper3.wav"
+dest_files=[ "res://.import/Whisper3.wav-a37a93995e46c61a4590a10a9aa88dbe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

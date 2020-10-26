@@ -1,6 +1,158 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Levels/MainMenu.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Jeebz-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Jeebz-Bold.ttf" type="DynamicFontData" id=4]
 
-[node name="MainMenu" type="Node2D"]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+float rand(vec2 n) {
+ return fract(cos(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+}
+
+float noise(vec2 n) {
+ vec2 d = vec2(0.0, 1.0);
+ vec2 b = floor(n);
+ vec2 f = smoothstep(vec2(0.0), vec2(1.0), fract(n));
+ return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);
+}
+
+float fbm(vec2 n) {
+ return noise(n) * 0.5 + noise(n * 2.0) * 0.25 + noise(n * 4.0) * 0.125 + noise(n * 8.0) * 0.065;
+}
+
+void fragment(){
+	vec2 p = vec2(UV.x * 2.5, -UV.y * 1.0);
+	float r = fbm(p - vec2(0.0, fbm(p) + TIME *0.5));
+	COLOR = vec4(r,r,r,UV.y);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 12
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 12
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Fade In"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="MainMenu" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.33371
+margin_top = 0.33371
+margin_right = 0.33371
+margin_bottom = 0.33371
+rect_pivot_offset = Vector2( 119.108, 130.868 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fog" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.666667 )
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.264862
+margin_right = 0.264862
+texture = ExtResource( 3 )
+stretch_mode = 1
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Labyrinth" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -46.5
+margin_top = 23.0
+margin_right = 46.5
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 3 )
+text = "Labyrinth"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.5
+margin_top = 12.0
+margin_right = 22.5
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 4 )
+text = "Start"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = 32.0
+margin_right = 18.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 5 )
+text = "Quit"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Fade In" = SubResource( 6 )
+"anims/Fade Out" = SubResource( 7 )
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

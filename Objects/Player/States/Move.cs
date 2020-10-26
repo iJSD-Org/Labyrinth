@@ -6,19 +6,7 @@ namespace Labyrinth.Objects.Player.States
 	public class Move : State
 	{
 		[Export] public int Speed = 100;
-		private Position2D _torch;
-        private Position2D _torchRight;
-        private Position2D _torchLeft;
-        private Sprite _torchSprite;
 
-        public override void Enter(KinematicBody2D host)
-        {
-            _torch = host.GetNode<Sprite>("Torch").GetNode<Position2D>("CircleLight");
-            _torchLeft = host.GetNode<Position2D>("TorchLeft");
-            _torchRight = host.GetNode<Position2D>("TorchRight");
-            _torchSprite = host.GetNode<Sprite>("Torch");
-        }
-        
 		public override void Update(KinematicBody2D host, float delta)
 		{
 			Vector2 inputDirection = new Vector2(
@@ -61,7 +49,7 @@ namespace Labyrinth.Objects.Player.States
 			else if (playerToMouse.x < 0 && playerToMouse.y > -5)
 			{
 				animPlayer.Play("left");
-				torch.Position = torchLeft.Position; ;
+				torch.Position = torchLeft.Position;
 				torch.RotationDegrees = -25;
 			}
 			else if (playerToMouse.x > 0 && playerToMouse.y <= -5)
