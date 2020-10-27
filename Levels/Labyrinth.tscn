@@ -379,7 +379,6 @@ volume_db = 0.8
 autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 scale = Vector2( 1.06259, 0.802122 )
 color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
 
