@@ -47,7 +47,6 @@ namespace Labyrinth.Levels
 							scoreStatus.Text = "Score upload fail!";
 							scoreStatus.AddColorOverride("font_color", Color.ColorN("Red"));
 						}
-						GetNode<Label>("Prompt").Visible = true;
 					}
 				}
 			}

@@ -333,6 +333,7 @@ autostart = true
 "anims/Fade In" = SubResource( 2 )
 
 [node name="Pause" parent="." instance=ExtResource( 10 )]
+
 [connection signal="body_entered" from="Node2D/Exit" to="." method="_on_Exit_body_entered"]
 [connection signal="timeout" from="MinotaurSpawnTimer" to="." method="_on_MinotaurSpawnTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
