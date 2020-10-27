@@ -14,7 +14,7 @@ namespace Labyrinth.Levels
 		public override void _Ready()
 		{
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
-			GetNode<KinematicBody2D>("Node2D/Player").Position = GetNode<Position2D>($"SpawnPoints/{_random.Next(1,5)}").Position;
+			GetNode<KinematicBody2D>("Node2D/Player").Position = GetNode<Position2D>($"SpawnPoints/{_random.Next(1,10)}").Position;
 		}
 
 		private void _on_MinotaurSpawnTimer_timeout()
@@ -26,7 +26,7 @@ namespace Labyrinth.Levels
 				GetNode<Node2D>("Node2D").AddChild(minotaurInstance);
 			}
 			GetNode<Timer>("MinotaurSpawnTimer").Stop();
-			GetNode<Timer>("MinotaurSpawnTimer").WaitTime = (float)(_random.NextDouble() * (110 - 40) + 40);
+			GetNode<Timer>("MinotaurSpawnTimer").WaitTime = (float)(_random.NextDouble() * (60 - 30) + 30);
 			GetNode<Timer>("MinotaurSpawnTimer").Start();
 		}
 
@@ -37,6 +37,7 @@ namespace Labyrinth.Levels
 				GetTree().ChangeScene("res://Levels/WinScreen.tscn");
 			}
 		}
+
 		private void _on_ScoreTimer_timeout()
 		{
 			//Score is in seconds
