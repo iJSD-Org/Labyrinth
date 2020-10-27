@@ -14,6 +14,7 @@ namespace Labyrinth.Levels
 		public override void _Ready()
 		{
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Fade In");
+			GetNode<KinematicBody2D>("Node2D/Player").Position = GetNode<Position2D>($"SpawnPoints/{_random.Next(1,5)}").Position;
 		}
 
 		private void _on_MinotaurSpawnTimer_timeout()
