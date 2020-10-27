@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Sprites/torchlight.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.17739, 4.64166 )
+extents = Vector2( 3.59512, 9.40188 )
 
 [node name="BigTorch" type="KinematicBody2D"]
 
@@ -13,10 +13,11 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.420925, 1.824 )
+position = Vector2( 1.11541, 3.80826 )
 shape = SubResource( 1 )
 
 [node name="Light" type="Light2D" parent="."]
+position = Vector2( -0.0992126, -0.0496068 )
 scale = Vector2( 2.02144, 1.96689 )
 texture = ExtResource( 2 )
 texture_scale = 0.06
