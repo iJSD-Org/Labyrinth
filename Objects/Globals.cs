@@ -14,7 +14,7 @@ namespace Labyrinth.Objects
 	{
 		public int PlayerScore = 0;
 		public string DiscordTag;
-
+		public bool Authorized = false;
 		private static readonly string _apiEndpoint = "https://discord.com/api/v8";
 
 		private string _scope = "identify";

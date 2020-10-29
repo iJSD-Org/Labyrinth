@@ -58,32 +58,29 @@ scale = Vector2( 3, 3 )
 
 [node name="Ghosts" type="Node" parent="Node2D"]
 
-[node name="Ghost" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 65.232, 12.7522 )
-
 [node name="Ghost2" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 127.548, 177.05 )
 
 [node name="Ghost3" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 362.053, -158.078 )
+position = Vector2( 366.772, -119.379 )
 
 [node name="Ghost37" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 219.509, -284.586 )
+position = Vector2( 52.4432, -307.239 )
 
 [node name="Ghost4" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 733.306, -190.526 )
+position = Vector2( 767.286, -319.837 )
 
 [node name="Ghost5" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1338.79, -128.735 )
+position = Vector2( 1332.12, -111.382 )
 
 [node name="Ghost6" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1849.73, 72.0673 )
+position = Vector2( 2036.18, -73.2957 )
 
 [node name="Ghost9" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1586.71, 254.282 )
+position = Vector2( 1584.04, 223.581 )
 
 [node name="Ghost8" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1924.74, 370.039 )
+position = Vector2( 1878.02, 404.745 )
 
 [node name="Ghost10" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 2861.59, 43.2741 )
@@ -92,19 +89,19 @@ position = Vector2( 2861.59, 43.2741 )
 position = Vector2( 2669.16, 264.217 )
 
 [node name="Ghost13" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2570.98, 1130.77 )
+position = Vector2( 2439.46, 1217.04 )
 
 [node name="Ghost14" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2129.78, 1114.12 )
+position = Vector2( 2050.58, 1227.26 )
 
 [node name="Ghost15" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2158.32, 779.951 )
+position = Vector2( 2537.76, 745.971 )
 
 [node name="Ghost16" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 704.282, 402.55 )
+position = Vector2( 562.789, 494.654 )
 
 [node name="Ghost17" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( -47.5678, 966.356 )
+position = Vector2( -71.5407, 1003.81 )
 
 [node name="Ghost18" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 766.38, 1016.3 )
@@ -112,35 +109,26 @@ position = Vector2( 766.38, 1016.3 )
 [node name="Ghost46" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 1550.23, 686.549 )
 
-[node name="Ghost48" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1287.72, 1121.01 )
-
 [node name="Ghost19" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1000.67, 1177.48 )
+position = Vector2( 1017.15, 1193.36 )
 
 [node name="Ghost20" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1246.31, 1487.24 )
-
-[node name="Ghost22" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1332.58, 1675.33 )
+position = Vector2( 1238.31, 1487.24 )
 
 [node name="Ghost24" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1424.75, 2606.19 )
+position = Vector2( 1274.31, 2597.71 )
 
 [node name="Ghost42" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1579.96, 2381.31 )
-
-[node name="Ghost41" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 730.727, 2501.38 )
+position = Vector2( 1575.99, 2374.96 )
 
 [node name="Ghost25" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2269.64, 2433.76 )
+position = Vector2( 2417.05, 2354.39 )
 
 [node name="Ghost51" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1959.84, 2182.33 )
+position = Vector2( 2070.71, 2266.75 )
 
 [node name="Ghost50" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2008.25, 2601.94 )
+position = Vector2( 1939.78, 2570.51 )
 
 [node name="Ghost49" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 2839.92, 2431.02 )
@@ -151,56 +139,44 @@ position = Vector2( 3195.15, 1248.83 )
 [node name="Ghost44" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 3750.45, 419.479 )
 
-[node name="Ghost26" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2941.46, 1908.44 )
-
 [node name="Ghost27" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 3923.91, 2391.65 )
+position = Vector2( 3892.77, 2311.35 )
 
 [node name="Ghost36" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 3926.89, 1984.77 )
 
 [node name="Ghost35" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 3618.33, 2486.98 )
+position = Vector2( 3571.19, 2469.02 )
 
 [node name="Ghost29" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 4968.01, 1652.5 )
+position = Vector2( 4938.31, 1655.33 )
 
 [node name="Ghost30" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 4609.81, 959.432 )
-
-[node name="Ghost32" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 4489.9, 329.827 )
+position = Vector2( 4432.35, 830.632 )
 
 [node name="Ghost33" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 3776.15, 180.809 )
-
-[node name="Ghost52" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 4355.9, -266.448 )
+position = Vector2( 3769.02, 145.173 )
 
 [node name="Ghost53" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 4611.47, -410.902 )
 
 [node name="Ghost31" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 4916.25, 905.554 )
+position = Vector2( 5013.9, 932.493 )
 
 [node name="Ghost28" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 3679.9, 1526.66 )
+position = Vector2( 3686.1, 1634.7 )
 
 [node name="Ghost45" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 4177.11, 1539.72 )
 
 [node name="Ghost23" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 712.69, 1926.06 )
-
-[node name="Ghost40" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 67.8085, 1476.34 )
+position = Vector2( 711.54, 1995.03 )
 
 [node name="Ghost39" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 333.252, 1914.73 )
 
 [node name="Ghost38" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 962.723, 1761.84 )
+position = Vector2( 990.341, 1838.46 )
 
 [node name="Ghost34" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 1485.99, 1968.82 )
@@ -215,7 +191,7 @@ position = Vector2( 3045.26, -597.188 )
 position = Vector2( 2652.63, -538.219 )
 
 [node name="Ghost7" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 1875.39, -244.392 )
+position = Vector2( 1653.4, -296.387 )
 
 [node name="Map Objects" type="Node" parent="Node2D"]
 
@@ -380,10 +356,10 @@ autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 scale = Vector2( 1.06259, 0.802122 )
-color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
+color = Color( 0.054902, 0.054902, 0.054902, 1 )
 
 [node name="MinotaurSpawnTimer" type="Timer" parent="."]
-wait_time = 27.0
+wait_time = 30.0
 autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
@@ -397,7 +373,7 @@ autostart = true
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="1" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 101.316, -188.159 )
+position = Vector2( 614.791, -128.243 )
 
 [node name="2" type="Position2D" parent="SpawnPoints"]
 position = Vector2( 785.635, 1660.3 )
@@ -406,7 +382,7 @@ position = Vector2( 785.635, 1660.3 )
 position = Vector2( 336.22, 2309.79 )
 
 [node name="7" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 763.581, 1159.86 )
+position = Vector2( 760.217, 1205.25 )
 
 [node name="8" type="Position2D" parent="SpawnPoints"]
 position = Vector2( 1174.63, 442.073 )
@@ -421,7 +397,7 @@ position = Vector2( 1561.79, 1048.46 )
 position = Vector2( 188.148, 884.677 )
 
 [node name="4" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 542.83, 558.785 )
+position = Vector2( 551.797, 622.497 )
 
 [node name="5" type="Position2D" parent="SpawnPoints"]
 position = Vector2( 1794.71, 329.314 )
