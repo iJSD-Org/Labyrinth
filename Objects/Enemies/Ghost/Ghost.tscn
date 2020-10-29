@@ -27,7 +27,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 71.3, 63.408 )
+extents = Vector2( 67.2052, 58.0533 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.38315, 6.23166 )
@@ -55,13 +55,15 @@ anims/float = SubResource( 2 )
 
 [node name="Wander" type="Node" parent="States"]
 script = ExtResource( 2 )
+Speed = 30
 
 [node name="WanderTimer" type="Timer" parent="States/Wander"]
+wait_time = 0.9
 
 [node name="Chase" type="Node" parent="States"]
 script = ExtResource( 4 )
-MaxSpeed = 150
-Acceleration = 130
+MaxSpeed = 112
+Acceleration = 100
 
 [node name="Weakened" type="Node" parent="States"]
 script = ExtResource( 5 )

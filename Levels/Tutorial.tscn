@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Jeebz-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets/Sprites/Logo WHITE.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/iJSD_logo.png" type="Texture" id=3]
 [ext_resource path="res://Levels/Tutorial.cs" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
@@ -148,19 +146,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Logo" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="iACADEMY" type="Sprite" parent="Logo"]
-position = Vector2( 110.343, 78.254 )
-scale = Vector2( 0.013, 0.013 )
-texture = ExtResource( 2 )
-
-[node name="iJSD" type="Sprite" parent="Logo"]
-position = Vector2( 163.729, 76.1728 )
-scale = Vector2( 0.025, 0.025 )
-texture = ExtResource( 3 )
+[node name="8" type="Label" parent="Text"]
+visible = false
+margin_left = 20.1275
+margin_top = 48.7937
+margin_right = 347.128
+margin_bottom = 105.794
+custom_fonts/font = SubResource( 1 )
+text = "Find the path of candles and you 
+will be free..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fadein = SubResource( 2 )

@@ -46,7 +46,6 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Fade In"
-length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -54,14 +53,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=7]
-length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -69,7 +67,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -94,8 +92,8 @@ self_modulate = Color( 1, 1, 1, 0.666667 )
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.264862
-margin_right = 0.264862
+margin_left = -0.0688477
+margin_right = -0.0688477
 texture = ExtResource( 3 )
 stretch_mode = 1
 flip_v = true
@@ -124,11 +122,27 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -22.5
-margin_top = 12.0
+margin_top = -5.35292
 margin_right = 22.5
-margin_bottom = 32.0
+margin_bottom = 14.6471
 custom_fonts/font = SubResource( 4 )
 text = "Start"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tutorial" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -29.5079
+margin_top = 13.3348
+margin_right = 31.4921
+margin_bottom = 33.3348
+custom_fonts/font = SubResource( 4 )
+text = "Tutorial"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -162,6 +176,8 @@ visible = true
 [node name="Click Esc to Continue" parent="Pause/Control" index="1"]
 text = "Authorize to Discord to continue."
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Tutorial" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Tutorial" to="." method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

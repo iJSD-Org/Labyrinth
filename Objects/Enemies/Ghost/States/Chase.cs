@@ -5,8 +5,8 @@ namespace Labyrinth.Objects.Enemies.Ghost.States
 	public class Chase : State
 	{
 		[Export] public float Speed;
-		[Export] public int MaxSpeed = 110;
-		[Export] public int Acceleration = 115;
+		[Export] public int MaxSpeed;
+		[Export] public int Acceleration;
 
 		private KinematicBody2D _player;
 
