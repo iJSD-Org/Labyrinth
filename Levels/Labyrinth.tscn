@@ -74,7 +74,10 @@ position = Vector2( 767.286, -319.837 )
 position = Vector2( 1332.12, -111.382 )
 
 [node name="Ghost6" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
-position = Vector2( 2036.18, -73.2957 )
+position = Vector2( 2033.66, -85.4887 )
+
+[node name="Ghost22" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
+position = Vector2( 2180.81, 101.19 )
 
 [node name="Ghost9" parent="Node2D/Ghosts" instance=ExtResource( 4 )]
 position = Vector2( 1584.04, 223.581 )
@@ -355,6 +358,7 @@ volume_db = 0.8
 autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 scale = Vector2( 1.06259, 0.802122 )
 color = Color( 0.054902, 0.054902, 0.054902, 1 )
 
