@@ -27,7 +27,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 67.2052, 58.0533 )
+extents = Vector2( 37.643, 36.6387 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.38315, 6.23166 )
@@ -42,7 +42,6 @@ script = ExtResource( 3 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 hframes = 4
-frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.46822, -0.187288 )
@@ -83,6 +82,7 @@ shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 4 )
+
 [connection signal="timeout" from="States/Wander/WanderTimer" to="States/Wander" method="_on_WanderTimer_timeout"]
 [connection signal="timeout" from="States/Weakened/WeakenedTimer" to="States/Weakened" method="_on_WeakenedTimer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
